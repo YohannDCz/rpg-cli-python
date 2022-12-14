@@ -8,3 +8,5 @@ Projet à travailler et répartir entre les 5 membres de l'équipe.
 - Créativité, fonctionalités supplémentaires: 5 points
 
 #####################################################
+
+- Formule de combat: Dommages = Attaque * Coefficient(objet) / (Défense + 100 / 100)
