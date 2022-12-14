@@ -1,43 +1,48 @@
-grille_debut = [[" ", " ", " ", " ", " ", " ", " ", ";"],
-                ["☐", "☐", "☐", "☐", "☐", "☐", "☐", ";"],
-                [" ", " ", " ", " ", " ", " ", " ", ";"],
-                [" ", "○", "○", "○", "○", "○", " ", ";"],
-                [";", " ", "☐", "☐", "☐", " ", ";", " "],
-                [" ", ";", " ", " ", " ", ";", " ", " "],
-                [" ", " ", ";", "J", ";", " ", " ", " "],
-                [" ", " ", " ", ";", " ", " ", " ", " "]]
+primary_grid =   [[" ", " ", " ", " ", " ", " ", " ", ";"],
+                  ["☐", "☐", "☐", "☐", "☐", "☐", "☐", ";"],
+                  [" ", " ", " ", "○", " ", " ", " ", ";"],
+                  [" ", "○", "○", "○", "○", "○", " ", ";"],
+                  [";", " ", "☐", "☐", "☐", " ", ";", " "],
+                  [" ", ";", " ", " ", " ", ";", " ", " "],
+                  [" ", " ", ";", "J", ";", " ", " ", " "],
+                  [" ", " ", " ", ";", " ", " ", " ", " "]]
  
-grille_fin =   [[" ", " ", " ", "△", " ", " ", " ", ";"],
-                ["○", "○", "○", "○", "○", "○", "○", ";"],
-                [" ", " ", "△", "△", "△", " ", " ", ";"],
-                [" ", " ", "○", "○", "○", " ", " ", ";"],
-                ["☐", " ", "☐", " ", "☐", " ", "☐", ";"],
-                [" ", "△", "△", "△", "△", "△", " ", ";"],
-                [" ", "○", " ", "○", " ", "○", " ", ";"],
-                [" ", "☐", " ", "☐", " ", "☐", " ", ";"]]
+secondary_grid = [[" ", " ", " ", "P", " ", " ", " ", ";"],
+                  ["○", "○", "○", "○", "○", "○", "○", ";"],
+                  [" ", " ", "△", "△", "△", " ", " ", ";"],
+                  [" ", " ", "○", "○", "○", " ", " ", ";"],
+                  ["☐", " ", "☐", " ", "☐", " ", "☐", ";"],
+                  [" ", "△", "△", "△", "△", "△", " ", ";"],
+                  [" ", "○", " ", "○", " ", "○", " ", ";"],
+                  [" ", "☐", " ", "☐", " ", "☐", " ", ";"]]
 
-#### REPRESENTATION GRAPHIQUE
+### J = Joueur
+### P = Princesse
+### ; = limite de jeu
+### ☐ = objet
+### ○ = ennemi
+### △ = potion
 
-def afficher_grille(grille):
-    column_header= [" ", "1", "2", "3", "4", "5", "6", "7", "8"]
-    grille.insert(0, column_header)
+def display_grid(grid):
+    column_header= ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
+    grid.insert(0, column_header)
     for i in range(1,9):
-        grille[i].insert(0, chr(64 + i))
-    for y in range(len(grille)):
+        grid[i].insert(0, chr(64 + i))
+    for y in range(len(grid)):
         b = "---------------------------------"
         print(b)
-        a = " | ".join(grille[y])
+        a = " | ".join(grid[y])
         print(a)
 
-afficher_grille(grille_fin)
+display_grid(secondary_grid)
 
-def correction_grille(grille):
-    del grille[0]
+def correction_grille(grid):
+    del grid[0]
     for i in range(0,8):
-        del grille[i][0]
-    return grille
+        del grid[i][0]
+    return grid
 
-afficher_grille(grille_debut)
+display_grid(primary_grid)
 
 current_position = "here"
 player_name = "Bob"
