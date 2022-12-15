@@ -51,9 +51,6 @@ current_position = "here"
 player_name = "Bob"
 game_map = ""
 
-def start_game():
-  return
-
 def inventory():
   return 
   
@@ -63,16 +60,40 @@ def Menu():
   # en fonction du choix appeler une del 4 fonctionl du dessous
   return
 
+# name = "Chuck Norris"
+# strengh = 80
+# defense = 50
+# life = 400
+# objects = {"knife": 20}
+# attacks = {"simple slap": 10, "royal stab": 40}
+class player:
+    def __init__(self, strength, defense, life, objects, attacks):
+      self.strength = strength
+      self.defense = defense
+      self.life = life
+      self.objects = objects
+      self.attacks = attacks
+class enem
+
 def start_game():
   # afficher le contexte et le début de l'histoire
-  # ask_name()
-  # move()
+  print("Après cette partie délirante dont vous ne vous rappelez plus, il semblerait  que vous vous soyez téléporté au fin fond de la jungle...")
+  print("Mais vous n'avez rien à perdre, car vous êtes CHUCK NORRIS!")
+  name = ask_name()
+  print(name)
+  
+  player(80, 50, 400, {"knife": 20}, [["simple slap", 10], ["chuck stab": 40]])
+  
+
+    
+  direction = move()
   return 
 
 def ask_name():
-  # demander le nom
-  return name
-
+  print("Tout d'abord comment vous appelez-vous ?")
+  name = str(input("Name: "))
+  return "Bonjour " + name + ", veuillez commencer la partie..."
+ 
 def load_game():
   # charger del datal en mémoire
   start_game()
