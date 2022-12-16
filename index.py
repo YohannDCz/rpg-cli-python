@@ -75,9 +75,9 @@ class player:
     self.objects = objects
     self.attacks = attacks
 
-  def fight(self, combo, monster):
-    attack = self.attacks[combo][1] * (self.strength + 100) / (monster.defense + 100)
-    return attack
+  def fight(self, attack, monster):
+    damage = self.attacks[attack][1] * (self.strength + 100) / (monster.defense + 100)
+    return damage
 
   Chuck_Norris = player(100, 50, 3, 400, ["knife"], [["simple slap", 10]["chuck stab", 40]])
   The_Real_Chuck_Norris = player(1000, 1000, 1000, 1000, [], ["simple slap", 10])
@@ -91,9 +91,9 @@ class monster:
     self.attacks = attacks
     self.give_xp = give_xp
 
-  def fight(self, combo, player):
-    attack = self.attacks[combo][1] * (self.strength + 100) / (player.defense + 100)
-    return attack
+  def fight(self, attack, player):
+    damage = self.attacks[attack][1] * (self.strength + 100) / (player.defense + 100)
+    return damage
 
   scarabee = monster(100, 10, 30, 100, [["Charge", 15], ["Battements d'ailes", 20], ["Transmet le Chagas", 30]], 100)
   piranha = monster(200, 20, 40, 200, [["Charge", 20], ["Slap", 30], ["Morsure", 40]], 150)
