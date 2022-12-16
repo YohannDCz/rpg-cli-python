@@ -12,6 +12,10 @@ class player:
   def fight(self, attack, monster):
     damage = self.attacks[attack][1] * (self.strength + 100) / (monster.defense + 100)
     return damage
+  
+  def experience(self, give_experience):
+    self.experience += give_experience
+    return self.experience 
 
   def inventory(self):
     print("Vous avez:")
