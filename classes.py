@@ -32,3 +32,27 @@ piranha = monster(200, 20, 40, 200, [["Charge", 20], ["Slap", 30], ["Morsure", 4
 anaconda = monster(350, 30, 50, 400, [["Coup de tête", 30], ["Morsure", 40], ["Constriction", 50]], 200)
 crocodile = monster(500, 50, 60, 700, [["Charge", 45], ["Coup de griffe", 55], ["Morsure", 65]], 300)
 pantere = monster(800, 100, 100, 1000, [["Charge", 60], ["Coup de griffe", 80], ["Morsure", 100]], 800)
+
+class weapon:
+    def __init__(self, name, attacks):
+        self.name = name
+        self.attacks = attacks
+
+couteau = weapon("Couteau", [["Chuck stab", 20]])
+katana = weapon("Katana", [["Katana strike", 30], ["Deep stab", 35]])
+beretta = weapon("Beretta 92FS", [["Coup de crosse", 35], ["Tir", 40]])
+m60 = weapon("M60 machine gun", [["Tir précis", 45]["Headshot", 50]])
+l_grenade = weapon("Lanceur de greande M79", [["Petites grenades", 55], ["Grosses grenades", 60]])
+cuilliere = weapon("Cuillère", ["Lance la cuillère", 1000])
+
+class armor:
+    def __init__(self, name, defense):
+        self.name = name
+        self.defense = defense
+
+
+chapeau = armor("Chapeau", 15)
+ceinture = armor("Ceinture en cuir", 25)
+jean = armor("Jean denim", 30)
+rangers = armor("Rangers", 50)
+pickup = armor("Pick-up", 100)

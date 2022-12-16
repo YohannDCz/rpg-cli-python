@@ -44,5 +44,7 @@ def display_grid(grid):
         print(a)
 
 display_grid(level3)
+print("\n")
 display_grid(level2)
+print("\n")
 display_grid(level1)

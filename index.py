@@ -11,13 +11,6 @@ def Menu():
   # en fonction du choix appeler une del 4 fonctionl du dessous
   return
 
-# name = "Chuck Norris"
-# strengh = 80
-# defense = 50
-# life = 400
-# objects = {"knife": 20}
-# attacks = {"simple slap": 10, "royal stab": 40}
-
 def start_game():
   # afficher le contexte et le début de l'histoire
   print("Après cette partie délirante dont vous ne vous rappelez plus, il semblerait  que vous vous soyez téléporté au fin fond de la jungle...")
@@ -25,10 +18,7 @@ def start_game():
   name = ask_name()
   print(name)
   
-  player(80, 50, 400, {"knife": 20}, [["simple slap", 10], ["chuck stab", 40]])
-  
-
-    
+  tutoriel()  
   direction = move()
   return 
 
