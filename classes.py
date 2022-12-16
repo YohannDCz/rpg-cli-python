@@ -1,11 +1,13 @@
 class player:
-  def __init__(self, experience, strength, defense, life_max, objects, attacks):
+  def __init__(self, name, experience, strength, defense, life_max, objects, attacks, level):
+    self.name = name
     self.experience = experience
     self.strength = strength
     self.defense = defense
     self.life_max = life_max
     self.objects = objects
     self.attacks = attacks
+    self.level = level
 
   def fight(self, attack, monster):
     damage = self.attacks[attack][1] * (self.strength + 100) / (monster.defense + 100)
@@ -16,8 +18,8 @@ class player:
     for i in self.objects:
       print("- ", i)
 
-Chuck_Norris = player(100, 50, 3, 400, ["knife"], [["simple slap", 10], ["chuck stab", 40]])
-The_Real_Chuck_Norris = player(1000, 1000, 1000, 1000, [], ["simple slap", 10])
+Chuck_Norris = player("Chuck Norris", 100, 50, 3, 400, ["knife"], [["simple slap", 10], ["chuck stab", 40]], 1)
+The_Real_Chuck_Norris = player("The Real Chuck Norris", 1000, 1000, 1000, 1000, [], ["simple slap", 10], 100)
 
 class monster:
   def __init__(self, name, experience, strength, defense, life_max, attacks, give_xp):
