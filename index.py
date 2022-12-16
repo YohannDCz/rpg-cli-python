@@ -1,15 +1,37 @@
-import classes.py
-import grids.py
+import classes
+import grids
 
-
-def inventory():
-  return 
+def game_title():
+  print("\n")
+  print("  %%%%  %%  %%  %%  %%    %%%%  %%  %% ")
+  print("%%      %%  %%  %%  %%  %%      %% %%  ")
+  print("%%      %%%%%%  %%  %%  %%      %%%%   ")
+  print("%%      %%  %%  %%  %%  %%      %% %%  ")
+  print("  %%%%  %%  %%  %%%%%%    %%%%  %%  %% ")
+  print("\n")
   
 def Menu():
+
   # Afficher lel optionl du menu
   # demander à l'utilisateur 
   # en fonction du choix appeler une del 4 fonctionl du dessous
   return
+
+
+def naming():
+    name = str(input("Quel est ton Nom ?"))
+    print("Ton nom est : {}".format(name))
+    confirm_name()
+
+def confirm_name():
+    r = str(input("Voulez-vous garder ce nom ? (oui/non)"))
+    if r.lower() == "non":
+        naming()
+    elif r.lower() == "oui":
+        print("Bon jeu !")
+    else:
+        print("Je n'ai pas compris !")
+        confirm_name()
 
 def start_game():
   # afficher le contexte et le début de l'histoire
@@ -19,7 +41,7 @@ def start_game():
   print(name)
   
   tutoriel()  
-  direction = move()
+  move()
   return 
 
 def ask_name():
