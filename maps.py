@@ -1,3 +1,6 @@
+import script
+import classes
+
 class maps:
 
     def __init__(self, level, map):
@@ -61,15 +64,15 @@ def correction_map(map):
 
 def position(position):
     if position[0] == "o":
-        find_object()
+        script.find_object()
     elif position[0] == "e":
-        fight()
+        script.fight()
     elif position[0] == "p":
-        potion()
+        script.potion()
     elif position == "P ":
-        princess()
+        script.princess()
     elif position =="l ":
-        game_over()
+        script.game_over()
 
 def map(move, map_level, i, j):
     map = map_level.map
