@@ -45,7 +45,9 @@ level3 = maps(3,
 ### e = ennemi
 ### p = potion
 
+
 def display_map(map):
+
     column_header= ["0 ", "1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ", "8 "]
     map.insert(0, column_header)
     for i in range(0,9):
@@ -56,51 +58,59 @@ def display_map(map):
         a = " | ".join(map[y])
         print(a)
 
+
 def correction_map(map):
+
     del map[0]
     for i in range(0,8):
         del map[i][0]
     return map
 
+
 def position(position):
+
     if position[0] == "o":
-        script.find_object()
+        script.find_object(position[1])
     elif position[0] == "e":
-        script.fight()
+        script.fight(position[1])
     elif position[0] == "p":
-        script.potion()
+        script.potion(position[1])
     elif position == "P ":
-        script.princess()
+        script.princess(position[1])
     elif position =="l ":
         script.game_over()
 
+
 def map(move, map_level, i, j):
+
     map = map_level.map
     move.lowercase()
     if move == "z":
         position = "  "
         position = map[i-1][j]
-        position()
+        position(position)
         position = "J "
     elif move == "s":
         position = "  "
         position = map[i+1][j]
-        position()
+        position(position)
         position = "J "
     elif move == "q":
         position = "  "
         position = map[i][j-1]
-        position()
+        position(position)
         position = "J "
     elif move == "d":
         position = "  "
         position = map[i][j+1]
-        position()
+        position(position)
         position = "J "
     return 
+
 
 display_map(level3.map)
 print("\n")
 display_map(level2.map)
 print("\n")
 display_map(level1.map)
+print("\n")
