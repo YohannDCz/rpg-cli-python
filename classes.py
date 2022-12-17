@@ -13,7 +13,7 @@ class player:
     damage = self.attacks[attack][1] * (self.strength + 100) / (monster.defense + 100)
     return damage
   
-  def experience(self, give_experience):
+  def receive_experience(self, give_experience):
     self.experience += give_experience
     return self.experience 
 
