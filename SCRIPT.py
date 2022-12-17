@@ -115,17 +115,16 @@ def difficulte():
   return character
 
 def load_game():
+    game_title()
     print("Veuillez patienter pendant que le jeu charge...\n\n")
     loading_bar("############################################\n\n")
     
 def start_game(player):
-  game_title()
   load_game()
   name = ask_name()
   confirm_name(name)
-#   load_game()
-  # afficher le contexte et le début de l'histoire
-  print_line("Contexte:")
+
+  print_line("Contexte: ")
   print_line("Après cette partie délirante dont vous ne vous rappelez plus, il semblerait que vous vous soyez téléporté au fin fond de la jungle...\n")
   print_line(f"Mais vous n'avez rien à perdre, car vous êtes {player.name}!\n")
   tutorial()  
@@ -133,7 +132,7 @@ def start_game(player):
   return 
 
 def tutorial():
-  print_line("Mais voilà, ous ètes face à un dilemme:\n")
+  print_line("Mais voilà, vous ètes face à un dilemme:\n")
   print_line("Votre couteau est cassé et vous vous demandez si vous devez continuer sans couteau...\n")
 
   def tutorial1():
@@ -146,7 +145,7 @@ def tutorial():
         def tutorial2():
             print_line("Avec quoi voulez vous le réparer?\n")
             print_line("1: Utiliser une cordelette\n")
-            print_line("2: Utiliser de a glue super forte\n")
+            print_line("2: Utiliser de la glue super forte\n")
             print_line("3: Invoquer MacGiver\n")
             choice2 = int(input())
             if choice2 == 1:
@@ -161,11 +160,12 @@ def tutorial():
                 print_line("Personne ne peut aider Chuck Norris, il se débrouille seul envers et contre tout.\n")
                 tutorial2()
                 return
-            tutorial2()
+        tutorial2()
     elif choice == 2:
         print_line("Chuck Norris ne va nulpart sans son couteau !\n")
         tutorial1()
         return
+  tutorial1()
   return
 
 def move(level):

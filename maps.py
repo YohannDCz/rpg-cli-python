@@ -53,6 +53,8 @@ def display_map(map):
         a = " | ".join(map[y])
         print(a)
 
+def move_map(level):
+    return
 # display_map(level3)
 # print("\n")
 # display_map(level2)
