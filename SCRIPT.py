@@ -43,6 +43,24 @@ def game_title():
   sleep(0.75)
   
 
+def curtains():
+
+  print("#################################################""")
+  sleep("0.5")
+  print("#################################################""")
+  sleep("0.5")
+  print("#################################################""")
+  sleep("0.5")
+  print("#################################################""")
+  sleep("0.5")
+  print("#################################################""")
+  sleep("0.5")
+  print("#################################################""")
+  sleep("0.5")
+  print("#################################################""")
+  sleep("0.5")
+
+
 def print_line(txt):
 
   for x in txt:
@@ -144,6 +162,8 @@ def start_game(player):
   load_game()
   ask_name()
 
+  curtains()
+
   print_line("Contexte: ")
   print_line("Après cette partie délirante dont vous ne vous rappelez plus, il semblerait que vous vous soyez téléporté au fin fond de la jungle...\n")
   print_line(f"Mais vous n'avez peur de rien, car vous êtes {player.name}!\n")
@@ -231,13 +251,22 @@ def position(position, player):
       elif position[1] == "2":
         player.find_object(classes.ceinture , classes.beretta)
       elif position[1] == "3":
-        player.find_object(classes.jean , classes. m60)
+        player.find_object(classes.jean , classes.m60)
       elif position[1] == "4":
-        player.find_object(classes.l_grenade , classes.rangers)
+        player.find_object(classes.rangers, classes.l_grenade)
       elif position[1] == "5":
-        player.find_object(classes.cuillere , classes.pickup)
+        player.find_object(classes.pickup, classes.cuillere)
     elif position[0] == "e":
-        fight(position[1])
+      if position[1] == "1":
+        classes.fight(player, classes.scarabee)
+      elif position[1] == "2":
+        classes.fight(player, classes.piranha)
+      elif position[1] == "3":
+        classes.fight(player, classes.anaconda)
+      elif position[1] == "4":
+        classes.fight(player, classes.crocodile)
+      elif position[1] == "5":
+        classes.fight(player, classes.pantere)
     elif position[0] == "p":
         potion(position[1])
     elif position == "P ":
@@ -273,19 +302,22 @@ def map(player, move, map_level, i, j):
     return 
 
 
-move(maps.level1, classes.Chuck_Norris)
-# start_game(classes.Chuck_Norris)
+position("e5", classes.Chuck_Norris)
 
-# def credits():
-#   # print afficher del infol sur la teaml 
-#   Menu()
 
-# def exit():
-#   # quitter le jeu
-#   return
+def potion():
+  return 
 
-# def player.find_object(classes. , classes.):
-#   return
+def princess():
+  return]
 
-# def event():
-#   return 
+def game_over():
+  return
+
+def credits():
+  # print afficher del infol sur la teaml 
+  return
+
+def exit():
+  # quitter le jeu
+  return

@@ -63,9 +63,9 @@ def correction_map(map):
         del map[i][0]
     return map
 
-display_map(level3.map)
-print("\n")
-display_map(level2.map)
-print("\n")
-display_map(level1.map)
-print("\n")
+# display_map(level3.map)
+# print("\n")
+# display_map(level2.map)
+# print("\n")
+# display_map(level1.map)
+# print("\n")

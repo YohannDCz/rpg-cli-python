@@ -30,18 +30,18 @@ class player:
       print_line(f"- {i}\n")
     print_line("Vous avez comme protection:\n")
     for key,value in self.objects["Armor"].items():
-      print_line(f"- {key}: ({value} défense).\n")
+      print(f"- {key}: ({value} défense).\n")
 
   def find_object(self, object1, object2):
     print_line("Il semble que vous soyez tombés sur des objets !\n")
-    print_line(f"[1] Vous ramassez votre {object1.name.lower()} qui est tombé. (+defense).\n")
-    print_line(f"[2] Vous trouvez un {object2.name.lower()} et vous en profitez pour vous fumer un autre cigar. (+attaque)\n")
+    print_line(f"[1] Vous ramassez (votre/vos) {object1.name.lower()} qui (est/sont) tombé(es).\n")
+    print_line(f"[2] Vous trouvez (un/une/des) {object2.name.lower()} et vous en profitez pour vous fumer un autre cigar.\n")
     object = int(input())
     if object == 1:
-      print_line(f"Vous venez de récupérer votre {object1.name.lower()}.\n")
+      print_line(f"Vous venez de récupérer votre/vos {object1.name.lower()}.\n")
       self.objects["Armor"][object1.name] = object1.defense
     elif object == 2:
-      print_line(f"Vous vous emparez du {object2.name.lower()}\n")
+      print_line(f"Vous vous emparez (du/des/de la) {object2.name.lower()}.\n")
       self.objects["Weapon"].append(object2.name)
       for key,value in object2.attacks.items():
         self.attacks[key] = value
@@ -50,7 +50,7 @@ class player:
     print_line("Veuillez choisir une attaque:\n")
     for key,value in self.attacks.items():
       i = list(self.attacks).index(key)
-      print_line(f"[{i}] {key} ({value} attaque).\n")
+      print(f"[{i + 1}] {key} ({value} attaque).")
     choice = int(input())
     player_attack = list(self.attacks)[choice-1]
     print_line("Vous avez choisi " + player_attack.lower() + "!\n")
@@ -60,9 +60,9 @@ class player:
     print_line("Veuillez choisir une armure:\n")
     for key,value in self.objects["Armor"].items():
       i = list(self.objects["Armor"]).index(key)
-      print_line(f"[{i}] {key} ({value} defense).\n")
+      print(f"[{i + 1}] {key} ({value} defense).")
     choice = int(input())
-    defense_armor = list(self.objects["Armor"])[choice]
+    defense_armor = list(self.objects["Armor"])[choice-1]
     print_line("Vous avez choisi " + defense_armor.lower() + "!\n")
     return defense_armor
     # if attack <= len(self.attacks):
@@ -85,17 +85,18 @@ class monster:
     print_line("Le monstre a le choix entre trois attaques...\n")
     for key,value in self.attacks.items():
       i = list(self.attacks).index(key)
-      print_line(f"[{i}] {key} ({value} attaque).\n")
+      print(f"[{i + 1}] {key} ({value} attaque).")
+    sleep(2.0)
     choice = randint(1, 3)
-    monster_attack = list(self.attacks)[choice - 1]
-    print_line("Le monster a choisi " + monster_attack.lower() + "!\n")
+    monster_attack = list(self.attacks)[choice-1]
+    print_line("Le monstre a choisi " + monster_attack.lower() + "!\n")
     return monster_attack
     
 scarabee = monster("un scarabee", 100, 10, 30, 100, {"Charge": 15, "Battements d'ailes": 20, "Transmet le Chagas": 30}, 100)
 piranha = monster("un piranha", 200, 20, 40, 200, {"Charge": 20, "Slap": 30, "Morsure": 40}, 150)
 anaconda = monster("un anaconda", 350, 30, 50, 400, {"Coup de tête": 30, "Morsure": 40, "Constriction": 50}, 200)
 crocodile = monster("un crocodile", 500, 50, 60, 700, {"Charge": 45, "Coup de griffe": 55, "Morsure": 65}, 300)
-pantere = monster("une pantere", 800, 100, 100, 1000, {"Charge": 60, "Coup de griffe": 80, "Morsure": 100}, 800)
+pantere = monster("une panthère", 800, 100, 100, 1000, {"Charge": 60, "Coup de griffe": 80, "Morsure": 100}, 800)
 
 class weapon:
     def __init__(self, name, attacks):
@@ -107,7 +108,7 @@ katana = weapon("Katana", {"Katana strike": 30, "Deep stab": 35})
 beretta = weapon("Beretta 92FS", {"Coup de crosse": 35, "Tir": 40})
 m60 = weapon("M60 machine gun", {"Tir précis": 45, "Headshot": 50})
 l_grenade = weapon("Lanceur de greande M79", {"Petites grenades": 55, "Grosses grenades": 60})
-cuilliere = weapon("Cuillère", {"Lancer la cuillère": "?"})
+cuillere = weapon("Cuillère", {"Lancer la cuillère": "?"})
 
 class armor:
     def __init__(self, name, defense):
@@ -126,7 +127,6 @@ def fight(player, monster):
   print_line(f"Vous êtes face à un nouvel ennemi, {monster.name} !\n")
   print_line("Que choisissez vous ?\n")
   print_line("[1] Contourner \n[2] Se battre\n")
-
   choice = int(input())
 
   if choice == 1:
@@ -137,7 +137,7 @@ def fight(player, monster):
 
   player_strength = int(player.strength)
   player_defense = int(player.defense)
-  monster_defense = int(monster.strength)
+
   monster_defense = int(monster.defense)
   
   armor_defense = int(player.objects['Armor'][player.choose_defense()])
@@ -146,28 +146,28 @@ def fight(player, monster):
     damages = round(weapon * (strength + 100) / (defense + 100))
     return damages
 
-  def damages_player(strength, defense, armor):
-    damages = round(1000 * (strength + 100) / (armor * (defense + 100)))
+  def damages_player(attack, defense, armor):
+    damages = round(1000 * (attack + 100) / (armor * (defense + 100)))
     return damages
 
   while player.life_max > 0 and monster.life_max > 0:
     if player.life_max > 0:
       weapon_attack = int(player.attacks[player.choose_attack()])
       print(weapon_attack)
-      damages_monster = damages_monster(weapon_attack, player_strength, monster_defense)
-      monster.life_max -= damages_monster
+      damages_monster1 = damages_monster(weapon_attack, player_strength, monster_defense)
+      monster.life_max -= damages_monster1
       print_line("La vie du monstre est de " + str(monster.life_max) + "\n")
-    elif player.life_max <= 0:
-      print_line("Le monstre a vaincu!")
+
     if monster.life_max > 0:
       monster_attack = monster.attacks[monster.choose_attack()]
-      damages_player = damages_player(monster_attack, player_defense, armor_defense)
-      player.life_max -= damages_player
+      damages_player1 = damages_player(monster_attack, player_defense, armor_defense)
+      player.life_max -= damages_player1
       print_line("Votre vie est de " + str(player.life_max) + "\n")
-    elif monster.life_max <= 0:
-      print_line("Vous avez vaincu!")
-
+  if player.life_max <= 0:
+    print_line("Le monstre a vaincu!")
+  elif monster.life_max <= 0:
+    print_line("Vous avez vaincu!")
 # _print_line(Chuck_Norris.attacks)
 # _print_line(len(Chuck_Norris.attacks))
 
-fight(Chuck_Norris, scarabee)
+# fight(Chuck_Norris, scarabee)
