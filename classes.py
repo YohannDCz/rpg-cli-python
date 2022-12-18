@@ -33,7 +33,7 @@ class player:
       print_line(f"- {i}\n")
     print_line("Vous avez comme protection:\n")
     for key,value in self.objects["Armor"].items():
-      print_line(f"- {key}: {value} points de défense.\n")
+      print_line(f"- {key}: ({value} défense).\n")
 
   def find_object(self, object1, object2):
     print_line("Il semble que vous soyez tombés sur des objets !\n")
@@ -52,9 +52,9 @@ class player:
   def attacks_list(self):
     print_line("Vous avez comme attaques:\n")
     for key,value in self.attacks.items():
-      print_line(f"- {key}: {value} point d'attaque.\n")
+      print_line(f"- {key} ({value} attaque).\n")
 
-Chuck_Norris = player("Chuck Norris", 100, 50, 3, 400, {"Weapon": ["Couteau"], "Armor": {"Chuck t-shirt": 1}}, {"Simple slap": 10, "Chuck stab": 25}, 1)
+Chuck_Norris = player("Chuck Norris", 100, 50, 3, 400, {"Weapon": ["Couteau"], "Armor": {"Chuck t-shirt": 10}}, {"Simple slap": 10, "Chuck stab": 25}, 1)
 The_Real_Chuck_Norris = player("The Real Chuck Norris", 1000, 1000, 1000, 1000, [], ["simple slap", 1000], 100)
 
 class monster:
@@ -100,7 +100,3 @@ ceinture = armor("Ceinture en cuir", 25)
 jean = armor("Jean denim", 30)
 rangers = armor("Rangers", 50)
 pickup = armor("Pick-up", 100)
-
-Chuck_Norris.find_object(chapeau, katana)
-Chuck_Norris.inventory()
-Chuck_Norris.attacks_list()

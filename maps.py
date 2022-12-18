@@ -1,6 +1,3 @@
-import script
-import classes
-
 class maps:
 
     def __init__(self, level, map):
@@ -51,7 +48,7 @@ def display_map(map):
     column_header= ["0 ", "1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ", "8 "]
     map.insert(0, column_header)
     for i in range(0,9):
-        map[i].insert(0, chr(64 + i))
+        map[i].insert(0, str(i - 1))
     for y in range(len(map)):
         b = "-----------------------------------------------"
         print(b)

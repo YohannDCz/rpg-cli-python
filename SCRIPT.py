@@ -149,7 +149,7 @@ def start_game(player):
   print_line(f"Mais vous n'avez peur de rien, car vous êtes {player.name}!\n")
   
   tutorial(player)  
-  move(maps.level1)
+  move(maps.level1, player)
   return 
 
 
@@ -194,7 +194,7 @@ def tutorial(player):
   return
 
 
-def move(game):
+def move(game, player):
 
   print_line(f"Vous êtes au niveau {game.level}.\n")
   print_line("Voici la map du niveau.\n")
@@ -202,10 +202,14 @@ def move(game):
   maps.display_map(game.map)
   print_line("Quel déplacement souhaitez vous effectuer ?\n")
   print_line("Appuyez sur [c] pour afficher les commandes\n")
+  print_line("Appuyez sur [i] pour afficher l'inventaire.")
   move = str(input())
   if move == "c":
     commandes()
-    move(maps.level1)
+    move(game, player)
+  elif move == "i":
+    player.inventory()
+    move(game, player)
   elif move == "z":
     return maps.map("z", game.level, 6, 4)
   elif move == "s":
@@ -219,7 +223,7 @@ def move(game):
   # En fonction du choix appeler une fonctionnalité
   # return map()
         
-move(maps.level1)
+move(maps.level1, classes.Chuck_Norris)
 # start_game(classes.Chuck_Norris)
 
 # def credits():
