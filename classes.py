@@ -32,31 +32,30 @@ class player:
     for i in self.objects["Weapon"]:
       print_line(f"- {i}\n")
     print_line("Vous avez comme protection:\n")
-    for key,value in self.objects["Armure"].items():
-      print_line(f"- {key}: {value}\n")
+    for key,value in self.objects["Armor"].items():
+      print_line(f"- {key}: {value} points de défense.\n")
 
   def find_object(self, object1, object2):
-  # if object == "1":
     print_line("Il semble que vous soyez tombés sur des objets !\n")
     print_line(f"[1] Vous ramassez votre {object1.name.lower()} qui est tombé. (+defense).\n")
     print_line(f"[2] Vous trouvez un {object2.name.lower()} et vous en profitez pour vous fumer un autre cigar. (+attaque)\n")
     object = int(input())
     if object == 1:
       print_line(f"Vous venez de récupérer votre {object1.name.lower()}.\n")
-      self.objects["Armure"][object1.name.lower()] = object1.defense
+      self.objects["Armor"][object1.name] = object1.defense
     elif object == 2:
-      print_line(f"Vous vous emparez du {object2.name.loewrcase()}\n")
+      print_line(f"Vous vous emparez du {object2.name.lower()}\n")
       self.objects["Weapon"].append(object2.name)
-      for key.values in object2.items():
-        self.attacks[object2.attacks.key] = object2.attack.value
+      for key,value in object2.attacks.items():
+        self.attacks[key] = value
         
   def attacks_list(self):
     print_line("Vous avez comme attaques:\n")
-    for i in self.attacks:
-      print_line(f"- {i}\n")
+    for key,value in self.attacks.items():
+      print_line(f"- {key}: {value} point d'attaque.\n")
 
-Chuck_Norris = player("Chuck Norris", 100, 50, 3, 400, {"Weapon": ["Knife"], "Armure": {"Chuck t-shirt": 1}}, {"Simple slap": 10, "Chuck stab": 40}, 1)
-The_Real_Chuck_Norris = player("The Real Chuck Norris", 1000, 1000, 1000, 1000, [], ["simple slap", 10], 100)
+Chuck_Norris = player("Chuck Norris", 100, 50, 3, 400, {"Weapon": ["Couteau"], "Armor": {"Chuck t-shirt": 1}}, {"Simple slap": 10, "Chuck stab": 25}, 1)
+The_Real_Chuck_Norris = player("The Real Chuck Norris", 1000, 1000, 1000, 1000, [], ["simple slap", 1000], 100)
 
 class monster:
   def __init__(self, name, experience, strength, defense, life_max, attacks, give_xp):
@@ -103,3 +102,5 @@ rangers = armor("Rangers", 50)
 pickup = armor("Pick-up", 100)
 
 Chuck_Norris.find_object(chapeau, katana)
+Chuck_Norris.inventory()
+Chuck_Norris.attacks_list()
