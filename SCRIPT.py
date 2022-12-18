@@ -211,18 +211,68 @@ def move(game, player):
     player.inventory()
     move(game, player)
   elif move == "z":
-    return maps.map("z", game.level, 6, 4)
+    return maps.map(player, "z", game.level, 6, 4)
   elif move == "s":
-    return maps.map("s", game.level, 6, 4)
+    return maps.map(player, "s", game.level, 6, 4)
   elif move == "q":
-    return maps.map("q", game.level, 6, 4)
+    return maps.map(player, "q", game.level, 6, 4)
   elif move == "d":
-    return maps.map("d", game.level, 6, 4)
+    return maps.map(player, "d", game.level, 6, 4)
   # print lel propositionl de déplacement
   # recupérer le choix de l'utilisateur 
   # En fonction du choix appeler une fonctionnalité
   # return map()
-        
+
+def position(position, player):
+
+    if position[0] == "o":
+      if position[1] == "1":
+        player.find_object(classes.chapeau , classes.katana)
+      elif position[1] == "2":
+        player.find_object(classes.ceinture , classes.beretta)
+      elif position[1] == "3":
+        player.find_object(classes.jean , classes. m60)
+      elif position[1] == "4":
+        player.find_object(classes.l_grenade , classes.rangers)
+      elif position[1] == "5":
+        player.find_object(classes.cuillere , classes.pickup)
+    elif position[0] == "e":
+        fight(position[1])
+    elif position[0] == "p":
+        potion(position[1])
+    elif position == "P ":
+        princess(position[1])
+    elif position =="l ":
+        game_over()
+
+
+def map(player, move, map_level, i, j):
+
+    map = map_level.map
+    move.lowercase()
+    if move == "z":
+        position = "  "
+        position = map[i-1][j]
+        position(player, position)
+        position = "J "
+    elif move == "s":
+        position = "  "
+        position = map[i+1][j]
+        position(player, position)
+        position = "J "
+    elif move == "q":
+        position = "  "
+        position = map[i][j-1]
+        position(player, position)
+        position = "J "
+    elif move == "d":
+        position = "  "
+        position = map[i][j+1]
+        position(player, position)
+        position = "J "
+    return 
+
+
 move(maps.level1, classes.Chuck_Norris)
 # start_game(classes.Chuck_Norris)
 
@@ -234,7 +284,7 @@ move(maps.level1, classes.Chuck_Norris)
 #   # quitter le jeu
 #   return
 
-# def find_object():
+# def player.find_object(classes. , classes.):
 #   return
 
 # def event():
