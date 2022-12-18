@@ -152,6 +152,7 @@ def start_game(player):
   move(maps.level1)
   return 
 
+
 def tutorial(player):
 
   print_line("Mais voilà, vous ètes face à un dilemme:\n")
@@ -218,7 +219,87 @@ def move(game):
   # En fonction du choix appeler une fonctionnalité
   # return map()
 
-move(maps.level1)
+
+def find_object(player, object1, object2):
+      object1 = classes.object1
+      object2 = classes.object2
+    # if object == "1":
+      print_line("Il semble que vous soyez tombés sur des objets !\n")
+      print_line(f"[1] Vous ramassez votre {classes.object1.name.lowercase()} qui est tombé. (+defense).\n")
+      print_line(f"[2] Vous trouvez un {classes.object2.name.lowercase()} non loin de là et il ne semble appartenir à personne. (+attaque)\n")
+      object = int(input())
+      if object == 1:
+        print_line(f"Vous venez de récupérer votre {classes.object1.name.lowercase()}.\n")
+        player.objects["Armure"][classes.object1.name.lowercase()] = classes.object1.defense
+      elif object == 2:
+        print_line(f"Vous vous emparez du {classes.object2.name.loewrcase()}\n")
+        player.objects["Weapon"].append(classes.object2.name)
+        for key.values in object2.items():
+          player.attacks[classes.object2.attacks.key] = classes.object2.attack.value
+
+chuck = classes.Chuck_Norris
+chapeau = classes.chapeau
+katana = classes.katana
+find_object(chuck, chapeau, katana)
+
+#     elif object == "2":
+#       print_line("Il semble que vous soyez tombés sur des objets !\n")
+#       print_line("[1] Vous récupérez votre ceinture en cuir (+defense).\n")
+#       print_line("[2] Vous ramassez votre arme préférée, le Beretta 92FS (+attaque).\n")
+#       object2 = int(input())
+#       if object2 == 1:
+#         print_line("Vous venez de récupérer votre ceinture.\n")
+#         player.objects["Armure"]["Ceinture"] = 25
+#       elif object2 == 2:
+#         print_line("Vous vous emparez de votre Beretta 92FS et vous en profitez pour tirer sur lese moustiques.\n")
+#         player.objects["Weapon"].append("Beretta 92FS")
+#         player.attacks["Tir à l'aveuglette"] = 55
+#         player.attacks["Bon baiser de beretta"] = 75
+
+#     elif object == "3":
+#       print_line("Il semble que vous soyez tombés sur des objets !\n")
+#       print_line("[1] Vous récupérez votre jean et sans qui cela n'a pas semblé génant (++defense).\n")
+#       print_line("[2] Vous ramassez votre deuxième arme préférée, pensant que ce rpg est bien fait, le M60 Machine Gun (++attaque).\n")
+#       object3 = int(input())
+#       if object3 == 1:
+#         print_line("Vous venez de récupérer votre jean.\n")
+#         player.objects["Armure"]["Jean"] = 40
+#       elif object3 == 2:
+#         print_line("Vous vous emparez de votre M60 Machine Gun et vous en profitez pour vous fumer un cigare.\n")
+#         player.objects["Weapon"].append("M60 Machine Gun")
+#         player.attacks["Tir à vif"] = 90
+#         player.attacks["Tir groupé"] = 100
+
+#     elif object == "4":
+#       print_line("Il semble que vous soyez tombés sur des objets !\n")
+#       print_line("[1] Vous enfourchez vos rangers, les chaussettes ne suffisant plus à votre avancée (+++defense).\n")
+#       print_line("[2] Vous trouvez votre fameux lanceur de grenade M79 (+++attaque).\n")
+#       object4 = int(input())
+#       if object4 == 1:
+#         print_line("Vous venez de récupérer vos rangers.\n")
+#         player.objects["Armure"]["Rangers"] = 65
+#       elif object4 == 2:
+#         print_line("Vous saluez votre lance grenade en lui promettant de belle aventure... Parler aux armes, il n'y a que ça de vrai, entre nous.\n")
+#         player.objects["Weapon"].append("Lanceur de grenade M79")
+#         player.attacks["Tir bourrain"] = 120
+#         player.attacks["Tir dans le tas"] = 130
+
+#     elif object == "5":
+#       print_line("Il semble que vous soyez tombés sur des objets !\n")
+#       print_line("[1] Vous rentrez dans votre pick-up, soulagé que la chance tourne enfin (++++defense).\n")
+#       print_line("[2] Vous ramassez une cuillère (?attaque).\n")
+#       object5 = int(input())
+#       if object5 == 1:
+#         print_line("Vous venez de récupérer votre pick-up.\n")
+#         player.objects["Armure"]["Pick-up"]= 150
+#       elif object5 == 2:
+#         print_line("Vous ramassez la cuillère.")
+#         player.objects["Weapon"].append("Cuillère")
+#         player.attacks["L'attaque de la cuillère"] = 1000
+
+        
+# move(maps.level1)
+
 # start_game(classes.Chuck_Norris)
 
 # def credits():
