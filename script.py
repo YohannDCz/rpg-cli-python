@@ -7,58 +7,58 @@ import sys
 def game_title():
 
   print("\n")
-  print("        %%%%%%  %%  %%  %%%%%%        ")
+  print("          %%%%%%  %%  %%  %%%%%%        ")
   sleep(0.1)
-  print("          %%    %%  %%  %%            ")
+  print("            %%    %%  %%  %%            ")
   sleep(0.1)
-  print("          %%    %%%%%%  %%%%          ")
+  print("            %%    %%%%%%  %%%%          ")
   sleep(0.1)
-  print("          %%    %%  %%  %%            ")
+  print("            %%    %%  %%  %%            ")
   sleep(0.1)
-  print("          %%    %%  %%  %%%%%%        ")
-  sleep(0.1)
-  print("\n")
-  print("  %%%%  %%  %%  %%  %%    %%%%  %%  %%") 
-  sleep(0.1)
-  print("%%      %%  %%  %%  %%  %%      %% %% ")
-  sleep(0.1)
-  print("%%      %%%%%%  %%  %%  %%      %%%%  ")
-  sleep(0.1)
-  print("%%      %%  %%  %%  %%  %%      %% %% ")
-  sleep(0.1)
-  print("  %%%%  %%  %%  %%%%%%    %%%%  %%  %%")
+  print("            %%    %%  %%  %%%%%%        ")
   sleep(0.1)
   print("\n")
+  print("   %%%%  %%  %%  %%  %%    %%%%  %%  %%") 
   sleep(0.1)
-  print("     %%%%    %%    %%    %%  %%%%%%   ")
+  print(" %%      %%  %%  %%  %%  %%      %% %% ")
   sleep(0.1)
-  print("   %%      %%  %%  %% %% %%  %%       ")
+  print(" %%      %%%%%%  %%  %%  %%      %%%%  ")
   sleep(0.1)
-  print("   %%      %%%%%%  %%    %%  %%%%     ")
+  print(" %%      %%  %%  %%  %%  %%      %% %% ")
   sleep(0.1)
-  print("   %%  %%  %%  %%  %%    %%  %%       ")
+  print("   %%%%  %%  %%  %%%%%%    %%%%  %%  %%")
   sleep(0.1)
-  print("     %%%%  %%  %%  %%    %%  %%%%%%   ")
+  print("\n")
+  sleep(0.1)
+  print("      %%%%    %%    %%    %%  %%%%%%   ")
+  sleep(0.1)
+  print("    %%      %%  %%  %% %% %%  %%       ")
+  sleep(0.1)
+  print("    %%      %%%%%%  %%    %%  %%%%     ")
+  sleep(0.1)
+  print("    %%  %%  %%  %%  %%    %%  %%       ")
+  sleep(0.1)
+  print("      %%%%  %%  %%  %%    %%  %%%%%%   ")
   print("\n")
   sleep(0.75)
   
 
 def curtains():
 
-  print("#################################################""")
-  sleep("0.5")
-  print("#################################################""")
-  sleep("0.5")
-  print("#################################################""")
-  sleep("0.5")
-  print("#################################################""")
-  sleep("0.5")
-  print("#################################################""")
-  sleep("0.5")
-  print("#################################################""")
-  sleep("0.5")
-  print("#################################################""")
-  sleep("0.5")
+  print("#################################################")
+  sleep(0.2)
+  print("#################################################")
+  sleep(0.2)
+  print("#################################################")
+  sleep(0.2)
+  print("#################################################")
+  sleep(0.2)
+  print("#################################################")
+  sleep(0.2)
+  print("#################################################")
+  sleep(0.2)
+  print("#################################################\n")
+  sleep(2.5)
 
 
 def print_line(txt):
@@ -93,21 +93,21 @@ def ask_name():
         return
     elif answer.lower() == "oui":
         print_line(f"Bon jeu, {name}!\n\n")
-        sleep(2.5)
         return
     else:
         print_line("Je n'ai pas compris !\n")
         confirm_name(name)
         return
+  confirm_name(name)
   return
 
 
 def Menu():
 
   print_line("Que souhaitez vous faire ?\n")
-  print_line("1: Charger le jeu\n")
-  print_line("2: Choisir la difficulté\n")
-  print_line("3: Voir les commandes\n")
+  print("1: Charger le jeu")
+  print("2: Choisir la difficulté")
+  print("3: Voir les commandes")
 
   answer = int(input())
   player = classes.Chuck_Norris
@@ -124,6 +124,7 @@ def Menu():
     commandes()
     sleep(2.5)
     Menu()
+    return
   else:
     print_line("Veuillez saisir une commande valide\n")
     Menu()
@@ -133,10 +134,10 @@ def Menu():
 def commandes():
 
   print_line("Vous pouvez choisir:\n")
-  print_line("- [z] pour avancer\n")
-  print_line("- [s] pour reculer\n")
-  print_line("- [q] pour aller vers la gauche\n")
-  print_line("- [d] pour aller à droite\n")
+  print("- [z] pour avancer")
+  print("- [s] pour reculer")
+  print("- [q] pour aller vers la gauche")
+  print("- [d] pour aller à droite")
 
 
 def difficulte():
@@ -180,16 +181,16 @@ def tutorial(player):
 
   def tutorial1(player):
     print_line("Que choisissez-vous ?\n")
-    print_line("1: Réparer le couteau\n")
-    print_line("2: Continuer sans les mains\n")
+    print("1: Réparer le couteau")
+    print("2: Continuer sans les mains")
     choice = int(input())
     if choice == 1:
       print_line("Vous avez choisi de réparer le couteau, bon choix.\n")
       def tutorial2(player):
         print_line("Avec quoi voulez vous le réparer?\n")
-        print_line("1: Utiliser une cordelette\n")
-        print_line("2: Utiliser de la glue super forte\n")
-        print_line("3: Invoquer MacGiver\n")
+        print("1: Utiliser une cordelette")
+        print("2: Utiliser de la glue super forte")
+        print("3: Invoquer MacGiver")
         choice2 = int(input())
         if choice2 == 1:
           print_line("Votre couteau est réparé !\n")
@@ -214,102 +215,123 @@ def tutorial(player):
   return
 
 
-def move(game, player):
+def position1(game, player, position):
+  
+  if position[0] == "o":
+    if position[1] == "1":
+      player.find_object(classes.chapeau , classes.katana)
+    elif position[1] == "2":
+      player.find_object(classes.ceinture , classes.beretta)
+    elif position[1] == "3":
+      player.find_object(classes.jean , classes.m60)
+    elif position[1] == "4":
+      player.find_object(classes.rangers, classes.l_grenade)
+    elif position[1] == "5":
+      player.find_object(classes.pickup, classes.cuillere)
+  elif position[0] == "e":
+    if position[1] == "1":
+      classes.fight(player, classes.scarabee)
+    elif position[1] == "2":
+      classes.fight(player, classes.piranha)
+    elif position[1] == "3":
+      classes.fight(player, classes.anaconda)
+    elif position[1] == "4":
+      classes.fight(player, classes.crocodile)
+    elif position[1] == "5":
+      classes.fight(player, classes.pantere)
+  elif position[0] == "p":
+      potion(position[1])
+  elif position == "P ":
+      princess(position[1])
+  elif position =="l ":
+      game_over()
+
+
+def map1(game, player, move):
+
+  map = game.map
+  move.lower()
+  if move == "z":
+    map[player.i][player.j] = "  "
+    player.i -= 1
+    position = map[player.i][player.j]
+    map[player.i][player.j] = "J "
+    position1(game, player, position)
+    return
+  elif move == "s":
+    map[player.i][player.j] = "  "
+    player.i += 1
+    position = map[player.i][player.j]
+    position1(game, player, position)
+    map[player.i][player.j] = "J "
+    return
+  elif move == "q":
+    map[player.i][player.j] = "  "
+    player.j -= 1
+    position = map[player.i][player.j]
+    position1(game, player, position)
+    map[player.i][player.j] = "J "
+    return
+  elif move == "d":
+    map[player.i][player.j] = "  "
+    player.j += 1
+    position = map[player.i][player.j]
+    position1(game, player, position)
+    map[player.i][player.j] = "J "
+    return
+  return 
+
+
+def move1(game, player):
 
   print_line(f"Vous êtes au niveau {game.level}.\n")
   print_line("Voici la map du niveau.\n")
-  maps.correction_map(game.map)
   maps.display_map(game.map)
-  print_line("Quel déplacement souhaitez vous effectuer ?\n")
-  print_line("Appuyez sur [c] pour afficher les commandes\n")
-  print_line("Appuyez sur [i] pour afficher l'inventaire.")
-  move = str(input())
-  if move == "c":
-    commandes()
-    move(game, player)
-  elif move == "i":
-    player.inventory()
-    move(game, player)
-  elif move == "z":
-    return maps.map(player, "z", game.level, 6, 4)
-  elif move == "s":
-    return maps.map(player, "s", game.level, 6, 4)
-  elif move == "q":
-    return maps.map(player, "q", game.level, 6, 4)
-  elif move == "d":
-    return maps.map(player, "d", game.level, 6, 4)
+  maps.correction_map(game.map)
+
+
+  def move2(game, player):
+
+    print_line("Quel déplacement souhaitez vous effectuer ?\n")
+    print("Appuyez sur [c] pour afficher les commandes")
+    print("Appuyez sur [i] pour afficher l'inventaire.")
+
+    move = str(input())
+    if move == "c":
+      commandes()
+      move1(game, player)
+    elif move == "i":
+      player.inventory()
+      move1(game, player)
+    elif move == "z":
+      map1(game, player, "z")
+      move1(game, player)
+    elif move == "s":
+      map1(game, player, "s")
+      move1(game, player)
+    elif move == "q":
+      map1(game, player, "q")
+      move1(game, player)
+    elif move == "d":
+      map1(game, player, "d")
+      move1(game, player)
+  move2(game,player)
+  return
   # print lel propositionl de déplacement
   # recupérer le choix de l'utilisateur 
   # En fonction du choix appeler une fonctionnalité
   # return map()
 
-def position(position, player):
 
-    if position[0] == "o":
-      if position[1] == "1":
-        player.find_object(classes.chapeau , classes.katana)
-      elif position[1] == "2":
-        player.find_object(classes.ceinture , classes.beretta)
-      elif position[1] == "3":
-        player.find_object(classes.jean , classes.m60)
-      elif position[1] == "4":
-        player.find_object(classes.rangers, classes.l_grenade)
-      elif position[1] == "5":
-        player.find_object(classes.pickup, classes.cuillere)
-    elif position[0] == "e":
-      if position[1] == "1":
-        classes.fight(player, classes.scarabee)
-      elif position[1] == "2":
-        classes.fight(player, classes.piranha)
-      elif position[1] == "3":
-        classes.fight(player, classes.anaconda)
-      elif position[1] == "4":
-        classes.fight(player, classes.crocodile)
-      elif position[1] == "5":
-        classes.fight(player, classes.pantere)
-    elif position[0] == "p":
-        potion(position[1])
-    elif position == "P ":
-        princess(position[1])
-    elif position =="l ":
-        game_over()
+move1(maps.level1, classes.Chuck_Norris)
 
-
-def map(player, move, map_level, i, j):
-
-    map = map_level.map
-    move.lowercase()
-    if move == "z":
-        position = "  "
-        position = map[i-1][j]
-        position(player, position)
-        position = "J "
-    elif move == "s":
-        position = "  "
-        position = map[i+1][j]
-        position(player, position)
-        position = "J "
-    elif move == "q":
-        position = "  "
-        position = map[i][j-1]
-        position(player, position)
-        position = "J "
-    elif move == "d":
-        position = "  "
-        position = map[i][j+1]
-        position(player, position)
-        position = "J "
-    return 
-
-
-position("e5", classes.Chuck_Norris)
 
 
 def potion():
   return 
 
 def princess():
-  return]
+  return
 
 def game_over():
   return

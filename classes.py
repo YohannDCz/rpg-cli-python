@@ -10,7 +10,7 @@ def print_line(txt):
   sleep(0.4)
 
 class player:
-  def __init__(self, name, experience, strength, defense, life_max, objects, attacks, level):
+  def __init__(self, name, experience, strength, defense, life_max, objects, attacks, level, i, j):
     self.name = name
     self.experience = experience
     self.strength = strength
@@ -19,6 +19,8 @@ class player:
     self.objects = objects  
     self.attacks = attacks
     self.level = level
+    self.i = i
+    self.j = j
   
   def receive_experience(self, give_experience):
     self.experience += give_experience
@@ -30,7 +32,7 @@ class player:
       print_line(f"- {i}\n")
     print_line("Vous avez comme protection:\n")
     for key,value in self.objects["Armor"].items():
-      print(f"- {key}: ({value} défense).\n")
+      print(f"- {key}: ({value} défense).")
 
   def find_object(self, object1, object2):
     print_line("Il semble que vous soyez tombés sur des objets !\n")
@@ -67,8 +69,8 @@ class player:
     return defense_armor
     # if attack <= len(self.attacks):
     #   if attack ==
-Chuck_Norris = player("Chuck Norris", 100, 50, 3, 400, {"Weapon": ["Couteau"], "Armor": {"Chuck t-shirt": 10, "Chuck bear": 15}}, {"Simple slap": 10, "Chuck stab": 25}, 1)
-The_Real_Chuck_Norris = player("The Real Chuck Norris", 1000, 1000, 1000, 1000, [], ["simple slap", 1000], 100)
+Chuck_Norris = player("Chuck Norris", 100, 50, 3, 400, {"Weapon": ["Couteau"], "Armor": {"Chuck t-shirt": 10, "Chuck bear": 15}}, {"Simple slap": 10, "Chuck stab": 25}, 1, 6, 4)
+The_Real_Chuck_Norris = player("The Real Chuck Norris", 1000, 1000, 1000, 1000, [], ["simple slap", 1000], 100, 6, 4)
 
 class monster:
   def __init__(self, name, experience, strength, defense, life_max, attacks, give_xp):
