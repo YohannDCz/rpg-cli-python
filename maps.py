@@ -1,3 +1,5 @@
+from time import sleep
+
 class maps:
 
     def __init__(self, level, map):
@@ -52,6 +54,7 @@ def display_map(map):
     for y in range(len(map)):
         b = "-----------------------------------------------"
         print(b)
+        sleep(0.05)
         a = " | ".join(map[y])
         print(a)
 

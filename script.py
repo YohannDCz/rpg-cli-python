@@ -155,7 +155,7 @@ def load_game():
 
   game_title()
   print_line("Veuillez patienter pendant que le jeu charge...\n\n")
-  loading_bar("############################################\n\n")
+  loading_bar("###############################################\n\n")
 
 
 def start_game(player):
@@ -166,17 +166,34 @@ def start_game(player):
   curtains()
 
   print_line("Contexte: ")
-  print_line("Après cette partie délirante dont vous ne vous rappelez plus, il semblerait que vous vous soyez téléporté au fin fond de la jungle...\n")
+  print_line("Après cette partie délirante dont vous ne vous souvenez plus, il semblerait que vous vous soyez téléporté au fin fond de la jungle...\n")
   print_line(f"Mais vous n'avez peur de rien, car vous êtes {player.name}!\n")
   
   tutorial(player)  
-  move(maps.level1, player)
+
+  while player.i != -1:
+    print_line(f"Vous êtes au niveau {maps.level1.level}.\n")
+    print_line("Voici la map du niveau.\n")
+    move1(maps.level1, player)
+  if player.i == -1:
+    player.i = 7
+    print_line(f"Vous êtes au niveau {maps.level2.level}.\n")
+    print_line("Voici la map du niveau.\n")
+    move1(maps.level2, player)
+  if player.i == -1:
+    player.i = 7
+    print_line(f"Vous êtes au niveau {maps.level3.level}.\n")
+    print_line("Voici la map du niveau.\n")
+    move1(maps.level3, player)
   return 
+
+def game_over():
+  return
 
 
 def tutorial(player):
 
-  print_line("Mais voilà, vous ètes face à un dilemme:\n")
+  print_line("Mais voilà, vous êtes face à un dilemme:\n")
   print_line("Votre couteau est cassé et vous vous demandez si vous devez continuer sans...\n")
 
   def tutorial1(player):
@@ -195,7 +212,7 @@ def tutorial(player):
         if choice2 == 1:
           print_line("Votre couteau est réparé !\n")
           print_line("Voici 20 points d'XP!\n")
-          experience = player.receive_experience(20)
+          experience = player.receive_xp(20)
           print_line(f"Vous avez maintenant {experience} XP.\n")
           # classes.
         elif choice2 == 2:
@@ -215,7 +232,7 @@ def tutorial(player):
   return
 
 
-def position1(game, player, position):
+def position1(player, position):
   
   if position[0] == "o":
     if position[1] == "1":
@@ -230,19 +247,24 @@ def position1(game, player, position):
       player.find_object(classes.pickup, classes.cuillere)
   elif position[0] == "e":
     if position[1] == "1":
-      classes.fight(player, classes.scarabee)
+      classes.monster.fight(player, classes.scarabee)
     elif position[1] == "2":
-      classes.fight(player, classes.piranha)
+      classes.monster.fight(player, classes.piranha)
     elif position[1] == "3":
-      classes.fight(player, classes.anaconda)
+      classes.monster.fight(player, classes.anaconda)
     elif position[1] == "4":
-      classes.fight(player, classes.crocodile)
+      classes.monster.fight(player, classes.crocodile)
     elif position[1] == "5":
-      classes.fight(player, classes.pantere)
+      classes.monster.fight(player, classes.pantere)
   elif position[0] == "p":
-      potion(position[1])
+    if position[1] == "1":
+      classes.potion.find_potion(classes.potion1)
+    elif position[1] == "2":
+      classes.potion.find_potion(classes.potion2)
+    elif position[1] == "3":
+      classes.potion.find_potion(classes.potion3)
   elif position == "P ":
-      princess(position[1])
+    return
   elif position =="l ":
       game_over()
 
@@ -256,36 +278,34 @@ def map1(game, player, move):
     player.i -= 1
     position = map[player.i][player.j]
     map[player.i][player.j] = "J "
-    position1(game, player, position)
+    position1(player, position)
     return
   elif move == "s":
     map[player.i][player.j] = "  "
     player.i += 1
     position = map[player.i][player.j]
-    position1(game, player, position)
     map[player.i][player.j] = "J "
+    position1(player, position)
     return
   elif move == "q":
     map[player.i][player.j] = "  "
     player.j -= 1
     position = map[player.i][player.j]
-    position1(game, player, position)
     map[player.i][player.j] = "J "
+    position1(player, position)
     return
   elif move == "d":
     map[player.i][player.j] = "  "
     player.j += 1
     position = map[player.i][player.j]
-    position1(game, player, position)
     map[player.i][player.j] = "J "
+    position1(player, position)
     return
   return 
 
 
 def move1(game, player):
 
-  print_line(f"Vous êtes au niveau {game.level}.\n")
-  print_line("Voici la map du niveau.\n")
   maps.display_map(game.map)
   maps.correction_map(game.map)
 
@@ -315,25 +335,14 @@ def move1(game, player):
     elif move == "d":
       map1(game, player, "d")
       move1(game, player)
+
   move2(game,player)
   return
-  # print lel propositionl de déplacement
-  # recupérer le choix de l'utilisateur 
-  # En fonction du choix appeler une fonctionnalité
-  # return map()
 
+Menu()
 
-move1(maps.level1, classes.Chuck_Norris)
-
-
-
-def potion():
-  return 
 
 def princess():
-  return
-
-def game_over():
   return
 
 def credits():
