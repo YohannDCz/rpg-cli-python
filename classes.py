@@ -77,7 +77,7 @@ class player:
     print_line("Vous avez choisi " + defense_armor.lower() + "!\n")
     return defense_armor
 
-Chuck_Norris = player("Chuck Norris", 100, 50, 3, 400, 400, {"Weapon": ["Couteau"], "Armor": {"Chuck t-shirt": 10, "Chuck bear": 15}, "Potion": {}}, {"Simple slap": 10, "Chuck stab": 25}, 1, 6, 4)
+Chuck_Norris = player("Chuck Norris", 100, 50, 3, 400, 400, {"Weapon": ["Couteau"], "Armor": {"Chuck t-shirt": 10, "Chuck bear": 15}, "Potion": {"Alcool de comptoir": [100, 100]}}, {"Simple slap": 10, "Chuck stab": 25}, 1, 6, 4)
 The_Real_Chuck_Norris = player("The Real Chuck Norris", 1000, 1000, 1000, 1000, 1000, {}, {"Simple slap", 1000}, 100, 6, 4)
 
 
@@ -103,54 +103,75 @@ class monster:
     print_line("Le monstre a choisi " + monster_attack.lower() + "!\n")
     return monster_attack
   
-  def fight(player, monster):
+  def fight(self, player):
 
-    print_line(f"Vous êtes face à un nouvel ennemi, {monster.name} !\n")
+    print_line(f"Vous êtes face à un nouvel ennemi, {self.name} !\n")
     print_line("Que choisissez vous ?\n")
-    print("[1] Contourner \n[2] Se battre")
+    print("[1] Contourner \n[2] Se battre\n[3] Se soigner")
     choice = int(input())
 
     if choice == 1:
       print_line("Les mouches vous faisant bigler, vous évitez le monstre sans savoir. Quand, tant bien que mal vous réussissez à retrouver le chemin, vous vous dite que vous remettrez ce combat à plus tard...\n")
       return
-
-    print_line("Vous avez soif de combat, alors passons à table !\n")
-
-    player_strength = int(player.strength)
-    player_defense = int(player.defense)
-
-    monster_defense = int(monster.defense)
+    elif choice == 2:
+      print_line("Vous avez soif de combat, alors passons à table !\n")
     
-    armor_defense = int(player.objects['Armor'][player.choose_defense()])
+      player_strength = int(player.strength)
+      player_defense = int(player.defense)
+      monster_defense = int(self.defense)
+      armor_defense = int(player.objects['Armor'][player.choose_defense()])
 
-    def damages_monster(weapon, strength, defense):
-      damages = round(weapon * (strength + 100) / (defense + 100))
-      return damages
+      def damages_monster(weapon, strength, defense):
+        damages = round(weapon * (strength + 100) / (defense + 100))
+        return damages
 
-    def damages_player(attack, defense, armor):
-      damages = round(1000 * (attack + 100) / (armor * (defense + 100)))
-      return damages
+      def damages_player(attack, defense, armor):
+        damages = round(1000 * (attack + 100) / (armor * (defense + 100)))
+        return damages
 
-    while player.life_max > 0 and monster.life_max > 0:
-      if player.life_max > 0:
-        weapon_attack = int(player.attacks[player.choose_attack()])
-        print(weapon_attack)
-        damages_monster1 = damages_monster(weapon_attack, player_strength, monster_defense)
-        monster.life_max -= damages_monster1
-        print_line("La vie du monstre est de " + str(monster.life_max) + "\n")
+      while player.life_max > 0 and self.life_max > 0:
+        if player.life_max > 0:
+          weapon_attack = int(player.attacks[player.choose_attack()])
+          print(weapon_attack)
+          damages_monster1 = damages_monster(weapon_attack, player_strength, monster_defense)
+          self.life_max -= damages_monster1
+          print_line("La vie du monstre est de " + str(self.life_max) + "\n")
 
-      if monster.life_max > 0:
-        monster_attack = monster.attacks[monster.choose_attack()]
-        damages_player1 = damages_player(monster_attack, player_defense, armor_defense)
-        player.life_max -= damages_player1
-        print_line("Votre vie est de " + str(player.life_max) + "\n")
-    if player.life_max <= 0:
-      print_line("Le monstre a vaincu!\n")
-    elif monster.life_max <= 0:
-      print_line("Vous avez vaincu!\n")
-      player.experience += player.receive_xp(monster.give_xp)
-      print_line(f"Vous reçevez {monster.give_xp}XP.\n") 
-      print_line(f"Vous avez {player.experience} XP !\n")
+        if self.life_max > 0:
+          monster_attack = self.attacks[self.choose_attack()]
+          damages_player1 = damages_player(monster_attack, player_defense, armor_defense)
+          player.life_max -= damages_player1
+          print_line("Votre vie est de " + str(player.life_max) + "\n")
+      if player.life_max <= 0:
+        print_line("Le monstre a vaincu!\n")
+      elif self.life_max <= 0:
+        print_line("Vous avez vaincu!\n")
+        player.experience += player.receive_xp(self.give_xp)
+        print_line(f"Vous reçevez {self.give_xp}XP.\n") 
+        print_line(f"Vous avez {player.experience} XP !\n")
+      return
+
+    ###########################
+    # Refaire cette partie avec potions objects
+    ########################### 
+    elif choice == 3:
+      potions = player.objects["Potion"]
+      if len(potions) > 0:
+        print_line("Vous avez comme potions:\n")
+        for key,value in potions.items():
+          i = list(potions).index(key)
+          print(f"[{i+1}] {key}: régénère et rajoute {value[0]} points de vie).")
+        choice = int(input())
+        potion = list(potions)[choice-1]
+        player.life = player.life_max
+        player.life_max += potions[potion][0]
+        del player.objects["Potion"][potion]
+        print(player.objects)
+        print(player.life_max)
+      elif len(potions) == 0:
+        print_line("Vous n'avez pas de potion !\n")
+      self.fight(player)
+
 
 scarabee = monster("un scarabee", 100, 10, 30, 100, {"Charge": 15, "Battements d'ailes": 20, "Transmet le Chagas": 30}, 100)
 piranha = monster("un piranha", 200, 20, 40, 200, {"Charge": 20, "Slap": 30, "Morsure": 40}, 150)
@@ -197,7 +218,7 @@ class potion:
     player.life = player.life_max
     return
 
-  def give_life_max(self, player):
+  def give_life_max1(self, player):
     player.life_max += self.give_life_max
     return
 
@@ -216,13 +237,13 @@ class potion:
       self.give_life(player)
       print_line("Tout vos points de vie se sont régénérés.\n")
       if self.give_life_max > 0:
-        self.give_life_max(player)
+        self.give_life_max1(player)
         print_line(f"Vous avez même {self.give_life_max} points de vie en plus !\n")
       self.receive_xp(player)
       print_line(f"La potion vous a rapporté {self.give_xp}XP !\n")
       print_line(f"Vous avez maintenant {player.life_max} points de vie et {player.experience}XP.\n")
     elif choice == 2:
-      player.objects["Potion"][self.name] = player.life_max + self.give_life_max
+      potions[self.name] = player.life_max + self.give_life_max
     elif choice == 3:
       return
     return
@@ -230,3 +251,5 @@ class potion:
 potion1 = potion("Alcool de comptoir", 0, 50)
 potion2 = potion("Musk discret", 200, 100)
 potion3 = potion("Vin chaud", 400, 300)
+
+scarabee.fight(Chuck_Norris)

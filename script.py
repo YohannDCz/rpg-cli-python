@@ -111,9 +111,9 @@ def Menu():
 
   answer = int(input())
   player = classes.Chuck_Norris
-
+  map = maps.level1
   if answer == 1:
-    start_game(player)
+    start_game(player, map)
   elif answer == 2:
     player = difficulte()
     print_line(f"Vous avez choisi {player.name}!\n")
@@ -158,39 +158,6 @@ def load_game():
   loading_bar("###############################################\n\n")
 
 
-def start_game(player):
-
-  load_game()
-  ask_name()
-
-  curtains()
-
-  print_line("Contexte: ")
-  print_line("Après cette partie délirante dont vous ne vous souvenez plus, il semblerait que vous vous soyez téléporté au fin fond de la jungle...\n")
-  print_line(f"Mais vous n'avez peur de rien, car vous êtes {player.name}!\n")
-  
-  tutorial(player)  
-
-  while player.i != -1:
-    print_line(f"Vous êtes au niveau {maps.level1.level}.\n")
-    print_line("Voici la map du niveau.\n")
-    move1(maps.level1, player)
-  if player.i == -1:
-    player.i = 7
-    print_line(f"Vous êtes au niveau {maps.level2.level}.\n")
-    print_line("Voici la map du niveau.\n")
-    move1(maps.level2, player)
-  if player.i == -1:
-    player.i = 7
-    print_line(f"Vous êtes au niveau {maps.level3.level}.\n")
-    print_line("Voici la map du niveau.\n")
-    move1(maps.level3, player)
-  return 
-
-def game_over():
-  return
-
-
 def tutorial(player):
 
   print_line("Mais voilà, vous êtes face à un dilemme:\n")
@@ -229,6 +196,10 @@ def tutorial(player):
       tutorial1(player)
       return
   tutorial1(player)
+  return
+
+
+def game_over():
   return
 
 
@@ -309,7 +280,6 @@ def move1(game, player):
   maps.display_map(game.map)
   maps.correction_map(game.map)
 
-
   def move2(game, player):
 
     print_line("Quel déplacement souhaitez vous effectuer ?\n")
@@ -319,13 +289,10 @@ def move1(game, player):
     move = str(input())
     if move == "c":
       commandes()
-      move1(game, player)
     elif move == "i":
       player.inventory()
-      move1(game, player)
     elif move == "z":
       map1(game, player, "z")
-      move1(game, player)
     elif move == "s":
       map1(game, player, "s")
       move1(game, player)
@@ -339,7 +306,41 @@ def move1(game, player):
   move2(game,player)
   return
 
-Menu()
+
+def start_game(player, map):
+
+  load_game()
+  ask_name()
+
+  curtains()
+
+  print_line("Contexte: ")
+  print_line("Après cette partie délirante dont vous ne vous souvenez plus, il semblerait que vous vous soyez téléporté au fin fond de la jungle...\n")
+  print_line(f"Mais vous n'avez peur de rien, car vous êtes {player.name}!\n")
+  
+  tutorial(player)  
+  game(map, player)
+
+def game(player):
+  map = maps.level1
+  print_line(f"Vous êtes au niveau {map.level}.\n")
+  print_line("Voici la map du niveau.\n")
+  while player.i >= 0:
+    move1(map, player)
+  if map.level == 1 and player.i == -1:
+    player.i = 7
+    map = maps.level2
+    print_line(f"Vous êtes au niveau {map.level}.\n")
+    print_line("Voici la map du niveau.\n")
+    move1(map, player)
+  if map.level == 2 and player.i == -1:
+    player.i = 7
+    map = maps.level3
+    print_line(f"Vous êtes au niveau {map.level}.\n")
+    print_line("Voici la map du niveau.\n")
+    move1(map, player)
+
+game(classes.Chuck_Norris)
 
 
 def princess():
