@@ -351,7 +351,7 @@ def position1(player, position):
     elif position == "P ":
         princess()
     elif position == "l ":
-        game_over()
+        game_over(player)
     return
 
 
@@ -364,7 +364,7 @@ def fight(player, monster):
 
     if player.name == "The Fat Chuck Norris":
         print_line("En vous échauffant pour le combat, vous vous foulez la cheville et succombez à vos blessures. Vous profitez néanmoins de cette distraction pour vous boire un dernier verre de rhum...")
-        game_over()
+        game_over(player)
         return
 
     if choice == 1:
@@ -406,7 +406,7 @@ def fight(player, monster):
                            str(player.life_max) + "\n")
         if player.life_max <= 0:
             print_line("Le monstre a vaincu!\n")
-            game_over()
+            game_over(player)
             return
         elif monster.life_max <= 0:
             print_line("Vous avez vaincu!\n")
@@ -457,6 +457,7 @@ def princess(player):
         "[1] Vous vous emparez de votre pickup est vous faites demi-tour.\n")
     print_line("[1] Vous en profitez pour lui fournir un cigar.\n")
 
+    choice = int(input())
     if choice == 1:
         win()
     elif choice == 2:
@@ -465,7 +466,7 @@ def princess(player):
         game(player)
     elif choice == 3:
         print_line(
-            " Votre femme n'est pas trop cigars, mais ce geste a raison de vous...\n")
+            "Votre femme n'est pas trop cigars, mais ce geste a raison de vous...\n")
         win()
     return
 
@@ -482,7 +483,7 @@ def win(player):
     return
 
 
-def game_over():
+def game_over(player):
     print_line("Game Over.")
     print_line("Il semble que la jungle aie eu raison de vous !\n")
     print_line(
