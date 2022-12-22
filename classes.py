@@ -64,7 +64,7 @@ class player:
         return
 
     def find_object(self, object1, object2):
-        print_line("Il semble que vous soyez tombés sur des objets !\n")
+        print_line("Il semble que vous soyez tombé sur des objets !\n")
         print_line(
             f"[1] Vous ramassez (votre/vos) {object1.name.lower()} qui (est/sont) tombé(es).\n")
         print_line(
@@ -83,7 +83,7 @@ class player:
                 self.attacks[key] = value
         elif choice == 3:
             return
-            
+
     def find_ring(self):
         print_line("Il semblerai que vous soyez tombé sur un easter egg !")
         print_line("Une bague d fiancaille, allez savoir pourquoi...")
@@ -120,12 +120,12 @@ The_Real_Chuck_Norris = player("The Real Chuck Norris", 1000, 1000, 1000, 1000, 
 
 class monster:
 
-    def __init__(self, name, experience, strength, defense, life_max, attacks, give_xp):
+    def __init__(self, name, experience, strength, defense, life, attacks, give_xp):
         self.name = name
         self.experience = experience
         self.strength = strength
         self.defense = defense
-        self.life_max = life_max
+        self.life = life
         self.attacks = attacks
         self.give_xp = give_xp
 
@@ -216,16 +216,15 @@ class potion:
             if self.give_life_max > 0:
                 self.give_life_max1(player)
                 print_line(
-                    f"Vous avez même {self.give_life_max} points de vie en plus !\n")
+                    f"Maintenant, vous avez même {self.give_life_max} points de vie en plus!\n")
             self.receive_xp(player)
             print_line(f"La potion vous a rapporté {self.give_xp}XP !\n")
             print_line(
                 f"Vous avez maintenant {player.life_max} points de vie et {player.experience}XP.\n")
         elif choice == 2:
-            player.objects["Potion"][self.name] = player.life_max + \
-                self.give_life_max
+            player.objects["Potion"][self.name] = [self.give_life_max, self.give_xp]
             print_line(
-                f"Vous venez d'ajouter: {self.name} à votre inventaire.")
+                f"Vous venez d'ajouter: {self.name} à votre inventaire.\n")
         elif choice == 3:
             return
         return

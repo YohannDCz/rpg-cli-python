@@ -138,10 +138,10 @@ def Menu():
 def commandes():
 
     print_line("Vous pouvez choisir:\n")
-    print("- [z] pour avancer")
-    print("- [s] pour reculer")
-    print("- [q] pour aller vers la gauche")
-    print("- [d] pour aller à droite")
+    print("- [z] pour aller vers le nord")
+    print("- [s] pour aller vers le sud")
+    print("- [q] pour aller vers l'ouest")
+    print("- [d] pour aller vers l'est")
 
 
 def difficulte():
@@ -238,33 +238,33 @@ def game(player):
     global position
     map = maps.level1
     print_line(f"Vous êtes au niveau {map.level}.\n")
-    print_line("Voici la map du niveau.\n")
-    while player.i > 0:
+    # print_line("Voici la map du niveau.\n")
+    while player.i > 0 and player.life > 0:
         move1(map, player)
     if map.level == 1 and player.i == 0:
         player.i = 7
         map = maps.level2
         map.map[player.i][player.j] = "J "
         print_line(f"Vous êtes au niveau {map.level}.\n")
-        print_line("Voici la map du niveau.\n")
-    while player.i > 0:
+        # print_line("Voici la map du niveau.\n")
+    while player.i > 0 and player.life > 0:
         move1(map, player)
     if map.level == 2 and player.i == 0:
         player.i = 7
         map = maps.level3
         map.map[player.i][player.j] = "J "
         print_line(f"Vous êtes au niveau {map.level}.\n")
-        print_line("Voici la map du niveau.\n")
-    while player.i > 0:
+        # print_line("Voici la map du niveau.\n")
+    while player.i > 0 and player.life > 0:
         move1(map, player)
 
 # On veut que lorsque le joueur fait un mouvement, la position s'affiche sur la grille
 
 
 def move1(game, player):
-    global position
-    maps.display_map(game.displayed)
-    maps.correction_map(game.displayed)
+
+    # maps.display_map(game.displayed)
+    # maps.correction_map(game.displayed)
 
     def move2(game, player):
         global position
@@ -332,7 +332,9 @@ def map1(game, player, move):
 
 def position1(player, position):
 
-    if position[0] == "o":
+    if position == "  ":
+        print_line("Aparremment, il n'y a rien ici...\n")
+    elif position[0] == "o":
         if position[1] == "1":
             player.find_object(classes.chapeau, classes.katana)
         elif position[1] == "2":
@@ -365,7 +367,7 @@ def position1(player, position):
             classes.potion3.find_potion(player)
         return
     elif position == "P ":
-        princess()
+        princess(player)
         return
     elif position == "l ":
         game_over(player)
@@ -377,89 +379,102 @@ def position1(player, position):
 def fight(player, monster):
 
     print_line(f"Vous êtes face à un nouvel ennemi, {monster.name} !\n")
-    print_line("Que choisissez vous ?\n")
-    print("[1] Contourner \n[2] Se battre\n[3] Se soigner")
-    choice = int(input())
 
-    if player.name == "The Fat Chuck Norris":
-        print_line("En vous échauffant pour le combat, vous vous foulez la cheville et succombez à vos blessures. Vous profitez néanmoins de cette distraction pour vous boire un dernier verre de rhum...")
-        game_over(player)
-        return
+    def fight2(player, monster):
+        print_line("Que choisissez vous ?\n")
+        print("[1] Contourner \n[2] Se battre\n[3] Se soigner")
+        choice = int(input())
 
-    if choice == 1:
-        print_line("Les mouches vous faisant bigler, vous évitez le monstre sans savoir. Quand, tant bien que mal vous réussissez à retrouver le chemin, vous vous dite que vous remettrez ce combat à plus tard...\n")
-        return
-    elif choice == 2:
-        print_line("Vous avez soif de combat, alors passons à table !\n")
-        curtains()
-        player_strength = int(player.strength)
-        player_defense = int(player.defense)
-        monster_defense = int(monster.defense)
-        armor_defense = int(player.objects['Armor'][player.choose_defense()])
-
-        def damages_monster(weapon, strength, defense):
-            damages = round(weapon * (strength + 100) / (defense + 100))
-            return damages
-
-        def damages_player(attack, defense, armor):
-            damages = round(1000 * (attack + 100) /
-                            (armor * (defense + 100)))
-            return damages
-
-        while player.life_max > 0 and monster.life_max > 0:
-            if player.life_max > 0:
-                weapon_attack = int(player.attacks[player.choose_attack()])
-                print(weapon_attack)
-                damages_monster1 = damages_monster(
-                    weapon_attack, player_strength, monster_defense)
-                monster.life_max -= damages_monster1
-                print_line("La vie du monstre est de " +
-                           str(monster.life_max) + "\n")
-
-            if monster.life_max > 0:
-                monster_attack = monster.attacks[monster.choose_attack()]
-                damages_player1 = damages_player(
-                    monster_attack, player_defense, armor_defense)
-                player.life_max -= damages_player1
-                print_line("Votre vie est de " +
-                           str(player.life_max) + "\n")
-        if player.life_max <= 0:
-            print_line("Le monstre a vaincu!\n")
+        if player.name == "The Fat Chuck Norris":
+            print_line("En vous échauffant pour le combat, vous vous foulez la cheville et succombez à vos blessures. Vous profitez néanmoins de cette distraction pour vous boire un dernier verre de rhum...")
             game_over(player)
             return
-        elif monster.life_max <= 0:
-            print_line("Vous avez vaincu!\n")
-            player.experience += player.receive_xp(monster.give_xp)
-            print_line(f"Vous reçevez {monster.give_xp}XP.\n")
-            print_line(f"Vous avez {player.experience} XP !\n")
+
+        if choice == 1:
+            print_line("Les mouches vous faisant bigler, vous évitez le monstre sans savoir. Quand, tant bien que mal vous réussissez à retrouver le chemin, vous vous dite que vous remettrez ce combat à plus tard...\n")
             return
-        return
+        elif choice == 2:
+            print_line("Vous avez soif de combat, alors passons à table !\n\n")
+            curtains()
+            player_strength = int(player.strength)
+            player_defense = int(player.defense)
+            monster_defense = int(monster.defense)
+            armor_defense = int(
+                player.objects['Armor'][player.choose_defense()])
 
-    ###########################
-    # Refaire cette partie avec potions objects
-    ###########################
+            def damages_monster(weapon, strength, defense):
+                damages = round(weapon * (strength + 100) / (defense + 100))
+                return damages
 
-    elif choice == 3:
-        potions = player.objects["Potion"]
-        if len(potions) > 0:
-            print_line("Vous avez comme potions:\n")
-            for key, value in potions.items():
-                i = list(potions).index(key)
-                print(
-                    f"[{i+1}] {key}: régénère et rajoute {value[0]} points de vie).")
-            choice = int(input())
-            potion = list(potions)[choice-1]
-            player.life = player.life_max
-            player.life_max += potions[potion][0]
-            del player.objects["Potion"][potion]
-            print(player.objects)
-            print(player.life_max)
-        elif len(potions) == 0:
-            print_line("Vous n'avez pas de potion !\n")
-        fight(player, monster)
-    else:
-        print_line("Je n'ai pas compris !")
-        fight(player, monster)
+            def damages_player(attack, defense, armor):
+                damages = round(1000 * (attack + 100) /
+                                (armor * (defense + 100)))
+                return damages
+
+            while player.life > 0 and monster.life > 0:
+                if player.life > 0:
+                    weapon_attack = int(player.attacks[player.choose_attack()])
+                    damages_monster1 = damages_monster(
+                        weapon_attack, player_strength, monster_defense)
+                    monster.life -= damages_monster1
+                    print_line("La vie du monstre est de " +
+                               str(monster.life) + "\n")
+
+                if monster.life > 0:
+                    monster_attack = monster.attacks[monster.choose_attack()]
+                    damages_player1 = damages_player(
+                        monster_attack, player_defense, armor_defense)
+                    player.life -= damages_player1
+                    print_line("Votre vie est de " +
+                               str(player.life_max) + "\n")
+            if player.life <= 0:
+                print_line("Le monstre a vaincu!\n")
+                game_over(player)
+                return
+            elif monster.life <= 0:
+                print_line("Vous avez vaincu!\n")
+                player.experience += player.receive_xp(monster.give_xp)
+                print_line(f"Vous reçevez {monster.give_xp}XP.\n")
+                print_line(f"Vous avez {player.experience} XP !\n")
+                return
+            return
+
+        ###########################
+        # Refaire cette partie avec potions objects
+        ###########################
+
+        elif choice == 3:
+            potions = player.objects["Potion"]
+            if len(potions) > 0:
+                print_line("Vous avez comme potions:\n")
+                for key, value in potions.items():
+                    i = list(potions).index(key)
+                    if value[0] == 0:
+                        print(f"[{i+1}] {key}: régénère tout les points de vie")
+                    elif value[0] > 0:
+                        print(
+                            f"[{i+1}] {key}: régénère et rajoute {value[0]} points de vie.")
+                choice = int(input())
+                potion = list(potions)[choice-1]
+                player.life = player.life_max
+                player.life_max += potions[potion][0]
+                player.experience += potions[potion][1]
+                print_line("Tout vos points de vie se sont régénérés.\n")
+                if potions[potion][0] > 0:
+                    print_line(
+                        f"Maintenant, vous avez même {potions[potion][0]} points de vie en plus!\n")
+                print_line(
+                    f"La potion vous a rapporté {potions[potion][1]}XP !\n")
+                print_line(
+                    f"Vous avez maintenant {player.life_max} points de vie et {player.experience}XP.\n")
+                del player.objects["Potion"][potion]
+            elif len(potions) == 0:
+                print_line("Vous n'avez pas de potion !\n")
+            fight2(player, monster)
+        else:
+            print_line("Je n'ai pas compris !")
+            fight2(player, monster)
+    fight2(player, monster)
     return
 
 
@@ -468,17 +483,17 @@ def princess(player):
     print_line(
         "Cette forme que vous aperçevez est t'elle celle d'un nouveau monstre?\n")
     print_line("En vous approchant la forme devient de plus en plus évidente.\n")
-    print_line("C'est celle de  Gena, votre femme!'\n")
+    print_line("C'est celle de Gena, votre femme!'\n")
     print_line("Que choisissez vous:\n")
     print_line(
         "[1] Vous l'emportez loin de la jungle car la sortie est juste devant.\n")
     print_line(
-        "[1] Vous vous emparez de votre pickup est vous faites demi-tour.\n")
-    print_line("[1] Vous en profitez pour lui fournir un cigar.\n")
+        "[2] Vous vous emparez de votre pickup est vous faites demi-tour.\n")
+    print_line("[3] Vous en profitez pour lui fournir un cigar.\n")
 
     choice = int(input())
     if choice == 1:
-        win()
+        win(player)
     elif choice == 2:
         player.i = 6
         player.j = 4
@@ -486,7 +501,7 @@ def princess(player):
     elif choice == 3:
         print_line(
             "Votre femme n'est pas trop cigars, mais ce geste a raison de vous...\n")
-        win()
+        win(player)
     return
 
 
@@ -498,7 +513,7 @@ def win(player):
     player.inventory()
     print_line(
         "La map et les items découverts seront sauvegardés pour la partie suivante\n")
-    save_map()
+    # save_map()
     return
 
 
@@ -509,12 +524,12 @@ def game_over(player):
         f"Mais vous ne vous en tirez pas trop mal {name}, vous repartez avec {player.experience}XP.\n")
     print_line(
         "La map et les items découverts seront sauvegardés pour la partie suivante\n")
-    save_map()
+    # save_map()
     return
 
 
-def save_map():
-    return
+# def save_map():
+#     return
 
 
 def credits():
@@ -525,6 +540,12 @@ def credits():
 def exit():
     # quitter le jeu
     return
+# Modifier la conditionnelle pour ne pas afficher une vie négative
+# Inclure les xp nécéssaires pour chaque niveau
+# Modifier le script pour afficher les objets sans le/la/les
+# Modifier les dommageg enccouru au joueur
+# Inclure la map
+# Tests avec the fat et the real chuck norris
+# Faire les crédits et la redirection vers le début du jeu
 
-
-Menu()
+princess(classes.Chuck_Norris)
