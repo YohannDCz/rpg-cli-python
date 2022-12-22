@@ -165,37 +165,15 @@ def start_game(player, map):
     global name
     name = ask_name()
 
-    # curtains()
+    curtains()
 
-    # print_line("Contexte: ")
-    # print_line("Après cette partie délirante dont vous ne vous souvenez plus, il semblerait que vous vous soyez téléporté au fin fond de la jungle...\n")
-    # print_line(
-    # 		f"Mais vous n'avez peur de rien, car vous êtes {player.name}!\n")
+    print_line("Contexte: ")
+    print_line("Après cette partie délirante dont vous ne vous souvenez plus, il semblerait que vous vous soyez téléporté au fin fond de la jungle...\n")
+    print_line(
+        f"Mais vous n'avez peur de rien, car vous êtes {player.name}!\n")
 
-    # tutorial(player)
-    # game(map, player)
-
-
-def game(player):
-    map = maps.level1
-    print_line(f"Vous êtes au niveau {map.level}.\n")
-    print_line("Voici la map du niveau.\n")
-    while player.i >= 0:
-        move1(map, player)
-    if map.level == 1 and player.i == -1:
-        player.i = 7
-        map = maps.level2
-        print_line(f"Vous êtes au niveau {map.level}.\n")
-        print_line("Voici la map du niveau.\n")
-    while player.i >= 0:
-        move1(map, player)
-    if map.level == 2 and player.i == -1:
-        player.i = 7
-        map = maps.level3
-        print_line(f"Vous êtes au niveau {map.level}.\n")
-        print_line("Voici la map du niveau.\n")
-    while player.i >= 0:
-        move1(map, player)
+    tutorial(player)
+    game(player)
 
 
 def load_game():
@@ -246,17 +224,50 @@ def tutorial(player):
             print_line("Chuck Norris ne va nulpart sans son couteau !\n")
             tutorial1(player)
             return
+        else:
+            print_line("Je n'ai pas compris !")
+            tutorial1(player)
     tutorial1(player)
     return
 
 
-def move1(game, player):
+position = ""
 
-    maps.display_map(game.map)
-    maps.correction_map(game.map)
+
+def game(player):
+    global position
+    map = maps.level1
+    print_line(f"Vous êtes au niveau {map.level}.\n")
+    print_line("Voici la map du niveau.\n")
+    while player.i > 0:
+        move1(map, player)
+    if map.level == 1 and player.i == 0:
+        player.i = 7
+        map = maps.level2
+        map.map[player.i][player.j] = "J "
+        print_line(f"Vous êtes au niveau {map.level}.\n")
+        print_line("Voici la map du niveau.\n")
+    while player.i > 0:
+        move1(map, player)
+    if map.level == 2 and player.i == 0:
+        player.i = 7
+        map = maps.level3
+        map.map[player.i][player.j] = "J "
+        print_line(f"Vous êtes au niveau {map.level}.\n")
+        print_line("Voici la map du niveau.\n")
+    while player.i > 0:
+        move1(map, player)
+
+# On veut que lorsque le joueur fait un mouvement, la position s'affiche sur la grille
+
+
+def move1(game, player):
+    global position
+    maps.display_map(game.displayed)
+    maps.correction_map(game.displayed)
 
     def move2(game, player):
-
+        global position
         print_line("Quel déplacement souhaitez vous effectuer ?\n")
         print("Appuyez sur [c] pour afficher les commandes")
         print("Appuyez sur [i] pour afficher l'inventaire.")
@@ -270,13 +281,10 @@ def move1(game, player):
             map1(game, player, "z")
         elif move == "s":
             map1(game, player, "s")
-            move1(game, player)
         elif move == "q":
             map1(game, player, "q")
-            move1(game, player)
         elif move == "d":
             map1(game, player, "d")
-            move1(game, player)
 
     move2(game, player)
     return
@@ -285,35 +293,40 @@ def move1(game, player):
 def map1(game, player, move):
 
     map = game.map
+    displayed = game.displayed
     move.lower()
+
+    def map2(map, displayed):
+        global position
+        map[player.i][player.j] = "  "
+        displayed[player.i][player.j] = "  "
+        position = map[player.i][player.j]
+
+    def map3(map, displayed):
+        global position
+        position = map[player.i][player.j]
+        for x in range(1, len(map[player.i])-1):
+            map[player.i][x] = "  "
+        map[player.i][player.j] = "J "
+        displayed[player.i][player.j] = "J "
+        position1(player, position)
+
     if move == "z":
-        map[player.i][player.j] = "  "
+        map2(map, displayed)
         player.i -= 1
-        position = map[player.i][player.j]
-        map[player.i][player.j] = "J "
-        position1(player, position)
-        return
+        map3(map, displayed)
     elif move == "s":
-        map[player.i][player.j] = "  "
+        map2(map, displayed)
         player.i += 1
-        position = map[player.i][player.j]
-        map[player.i][player.j] = "J "
-        position1(player, position)
-        return
+        map3(map, displayed)
     elif move == "q":
-        map[player.i][player.j] = "  "
+        map2(map, displayed)
         player.j -= 1
-        position = map[player.i][player.j]
-        map[player.i][player.j] = "J "
-        position1(player, position)
-        return
+        map3(map, displayed)
     elif move == "d":
-        map[player.i][player.j] = "  "
+        map2(map, displayed)
         player.j += 1
-        position = map[player.i][player.j]
-        map[player.i][player.j] = "J "
-        position1(player, position)
-        return
+        map3(map, displayed)
     return
 
 
@@ -330,6 +343,7 @@ def position1(player, position):
             player.find_object(classes.rangers, classes.l_grenade)
         elif position[1] == "5":
             player.find_object(classes.pickup, classes.cuillere)
+        return
     elif position[0] == "e":
         if position[1] == "1":
             fight(player, classes.scarabee)
@@ -341,6 +355,7 @@ def position1(player, position):
             fight(player, classes.crocodile)
         elif position[1] == "5":
             fight(player, classes.pantere)
+        return
     elif position[0] == "p":
         if position[1] == "1":
             classes.potion1.find_potion(player)
@@ -348,10 +363,14 @@ def position1(player, position):
             classes.potion2.find_potion(player)
         elif position[1] == "3":
             classes.potion3.find_potion(player)
+        return
     elif position == "P ":
         princess()
+        return
     elif position == "l ":
         game_over(player)
+    elif position == "ee":
+        player.find_ring()
     return
 
 
@@ -508,6 +527,4 @@ def exit():
     return
 
 
-start_game(classes.Chuck_Norris, maps.level1)
-print(name)
-# game(classes.Chuck_Norris)
+Menu()
