@@ -3,13 +3,14 @@ from time import sleep
 
 class maps:
 
-    def __init__(self, level, map, displayed):
+    def __init__(self, level, experience, map, displayed):
         self.level = level
+        self.experience = experience
         self.map = map
         self.displayed = displayed
 
 
-level1 = maps(1,
+level1 = maps(1, 0,
               [["l ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "l "],
                ["l ", "o2", "o2", "o2", "o2", "o2", "o2", "o2", "l "],
                ["l ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "l "],
@@ -28,7 +29,7 @@ level1 = maps(1,
                ["l ", "  ", "  ", "  ", "J ", "  ", "  ", "  ", "l "],
                ["  ", "l ", "l ", "l ", "l ", "l ", "l ", "l ", "  "]])
 
-level2 = maps(2,
+level2 = maps(2, 300,
               [["l ", "e4", "e4", "e4", "e4", "e4", "e4", "e4", "l "],
                ["l ", "  ", "  ", "p2", "p2", "p2", "  ", "  ", "l "],
                ["l ", "  ", "  ", "e3", "e3", "e3", "  ", "  ", "l "],
@@ -47,7 +48,7 @@ level2 = maps(2,
                ["l ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "l "],
                ["l ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "l "]])
 
-level3 = maps(3,
+level3 = maps(3, 600,
               [["l ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "l "],
                ["l ", "  ", "P ", "  ", "P ", "  ", "P ", "  ", "l "],
                ["l ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "l "],

@@ -49,19 +49,32 @@ class player:
         return self.experience
 
     def inventory(self):
-        print_line("Vous avez comme armes:\n")
-        for i in self.objects["Weapon"]:
-            print(f"- {i}")
-        sleep(0.2)
-        print_line("Vous avez comme protections:\n")
-        for key, value in self.objects["Armor"].items():
-            print(f"- {key}: ({value} défense).")
-        sleep(0.2)
-        print_line("Vous avez comme potions:\n")
-        for key, value in self.objects["Potion"].items():
-            print(f"- {key}: ({value} points de vie).")
-        sleep(0.2)
-        return
+        if len(self.objects) == 0:
+            print_line("Chuck_Norris n'a besoin de rien pour avancer..\n")
+            return
+        elif len(self.objects) > 0:
+            if len(self.objects["Weapon"]) > 0:
+                print_line("Vous avez comme armes:\n")
+                for i in self.objects["Weapon"]:
+                    print(f"- {i}")
+                sleep(0.2)
+            elif len(self.objects["Weapon"]) == 0:
+                print_line("Vous n'avez pas d'armes !\n")
+            if len(self.objects["Armor"]) > 0:
+                print_line("Vous avez comme protections:\n")
+                for key, value in self.objects["Armor"].items():
+                    print(f"- {key}: ({value} défense).")
+                sleep(0.2)
+            elif len(self.objects["Armor"]) == 0:
+                print_line("Vous n'avez pas de protections !\n")
+            if len(self.objects["Potion"]) > 0:
+                print_line("Vous avez comme potions:\n")
+                for key, value in self.objects["Potion"].items():
+                    print(f"- {key}: ({value} points de vie).")
+                sleep(0.2)
+            elif len(self.objects["Potion"]) == 0:
+                print_line("Vous n'avez pas de portions !\n")
+            return
 
     def find_object(self, object1, object2):
         print_line("Il semble que vous soyez tombé sur des objets !\n")
@@ -74,7 +87,9 @@ class player:
         if choice == 1:
             print_line(
                 f"Vous venez de récupérer votre/vos {object1.name.lower()}.\n")
-            self.objects["Armor"][object1.name] = object1.defense
+            self.objects["Armor"] = {object1.name: object1.defense}
+
+            # self.objects["Armor"][object1.name] = object1.defense
         elif choice == 2:
             print_line(
                 f"Vous vous emparez (du/des/de la) {object2.name.lower()}.\n")
@@ -113,9 +128,9 @@ class player:
 The_Fat_Chuck_Norris = player("The Fat Chuck Norris", 100, 0, 0, 100, 100, {"Weapon": ["Mauvaise haleine"], "Armor": {
                               "Bedaine alccolisée": 0}, "Potion": {"Cerceuil": 0}}, {"Rot retentissant": 0}, 1, 6, 4)
 Chuck_Norris = player("Chuck Norris", 100, 50, 30, 400, 400, {"Weapon": ["Couteau"], "Armor": {
-                      "Chuck t-shirt": 10, "Chuck bear": 15}, "Potion": {"Alcool de comptoir": [100, 100]}}, {"Simple slap": 10, "Chuck stab": 25}, 1, 6, 4)
+                      "Chuck t-shirt": 10, "Chuck bear": 15}, "Potion": {"Alcool de comptoir": [100, 100]}}, {"Simple slap": 10, "Chuck stab": 25}, 1, 1, 4)
 The_Real_Chuck_Norris = player("The Real Chuck Norris", 1000, 1000, 1000, 1000, 1000, {
-}, {"Simple slap", 1000}, 100, 6, 4)
+"Weapon": [],"Armor": {}, "Potion": {}}, {"Simple slap", 1000}, 100, 6, 4)
 
 
 class monster:
@@ -233,3 +248,6 @@ class potion:
 potion1 = potion("Alcool de comptoir", 0, 50)
 potion2 = potion("Musk discret", 200, 100)
 potion3 = potion("Vin chaud", 400, 300)
+
+The_Real_Chuck_Norris.find_object(chapeau, katana)
+The_Real_Chuck_Norris.inventory()

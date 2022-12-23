@@ -235,28 +235,65 @@ position = ""
 
 
 def game(player):
-    global position
+
     map = maps.level1
     print_line(f"Vous êtes au niveau {map.level}.\n")
+    x = 1
     # print_line("Voici la map du niveau.\n")
-    while player.i > 0 and player.life > 0:
-        move1(map, player)
-    if map.level == 1 and player.i == 0:
-        player.i = 7
-        map = maps.level2
-        map.map[player.i][player.j] = "J "
-        print_line(f"Vous êtes au niveau {map.level}.\n")
-        # print_line("Voici la map du niveau.\n")
-    while player.i > 0 and player.life > 0:
-        move1(map, player)
-    if map.level == 2 and player.i == 0:
-        player.i = 7
-        map = maps.level3
-        map.map[player.i][player.j] = "J "
-        print_line(f"Vous êtes au niveau {map.level}.\n")
-        # print_line("Voici la map du niveau.\n")
-    while player.i > 0 and player.life > 0:
-        move1(map, player)
+    def game1(player, map, x):
+        while player.i > 0 and player.life > 0:
+            move1(map, player)
+        if map.level == x and player.i == 0:
+            if x == 2:
+                map = maps.level3
+                x += 1
+            elif x == 1:
+                map = maps.level2
+                x += 1
+            print_line(f"Vous avez {player.experience}XP. ") 
+            print_line(f"Le nombre d'XP requis pour passer le niveau est de {map.experience}XP.\n")
+            if player.experience >= map.experience:
+                player.i = 7
+                map.map[player.i][player.j] = "J "
+                print_line(f"Vous êtes au niveau {map.level}.\n")
+                # print_line("Voici la map du niveau.\n")
+            else:
+                if x == 2:
+                    x -= 1
+                    map = maps.level1
+                elif x == 3:
+                    x -= 1
+                    map = maps.level2
+                def restart():
+                    print_line("Voulez vous redémarrer le niveau ? (oui/non)")
+                    choice = str(input())
+                    if choice == "oui":
+                        player.i = 6
+                        print_line("Vous venez de redémarrer le niveau.\n")
+                        game1(player, map, x)
+                        return
+                    elif choice == "non":
+                        game_over()
+                        return
+                    else:
+                        print_line("Je n'ai pas compris !\n")
+                        restart()
+                restart()
+        x += 1
+    game1(player, maps.level1, x)
+    game1(player, maps.level2, x)
+    game1(player, maps.level3, x)
+
+    # while player.i > 0 and player.life > 0:
+    #     move1(map, player)
+    # if map.level == 2 and player.i == 0:
+    #     player.i = 7
+    #     map = maps.level3
+    #     map.map[player.i][player.j] = "J "
+    #     print_line(f"Vous êtes au niveau {map.level}.\n")
+    #     # print_line("Voici la map du niveau.\n")
+    # while player.i > 0 and player.life > 0:
+    #     move1(map, player)
 
 # On veut que lorsque le joueur fait un mouvement, la position s'affiche sur la grille
 
@@ -293,17 +330,16 @@ def move1(game, player):
 def map1(game, player, move):
 
     map = game.map
+    map1 = map
     displayed = game.displayed
     move.lower()
 
     def map2(map, displayed):
-        global position
         map[player.i][player.j] = "  "
         displayed[player.i][player.j] = "  "
         position = map[player.i][player.j]
 
     def map3(map, displayed):
-        global position
         position = map[player.i][player.j]
         for x in range(1, len(map[player.i])-1):
             map[player.i][x] = "  "
@@ -312,21 +348,21 @@ def map1(game, player, move):
         position1(player, position)
 
     if move == "z":
-        map2(map, displayed)
+        map2(map1, displayed)
         player.i -= 1
-        map3(map, displayed)
+        map3(map1, displayed)
     elif move == "s":
-        map2(map, displayed)
+        map2(map1, displayed)
         player.i += 1
-        map3(map, displayed)
+        map3(map1, displayed)
     elif move == "q":
-        map2(map, displayed)
+        map2(map1, displayed)
         player.j -= 1
-        map3(map, displayed)
+        map3(map1, displayed)
     elif move == "d":
-        map2(map, displayed)
+        map2(map1, displayed)
         player.j += 1
-        map3(map, displayed)
+        map3(map1, displayed)
     return
 
 
@@ -386,7 +422,8 @@ def fight(player, monster):
         choice = int(input())
 
         if player.name == "The Fat Chuck Norris":
-            print_line("En vous échauffant pour le combat, vous vous foulez la cheville et succombez à vos blessures. Vous profitez néanmoins de cette distraction pour vous boire un dernier verre de rhum...")
+            print_line("En vous échauffant pour le combat, vous vous foulez la cheville et succombez à vos blessures. Vous profitez néanmoins de cette distraction pour vous boire un dernier verre de rhum...\n")
+            curtains()
             game_over(player)
             return
 
@@ -417,16 +454,18 @@ def fight(player, monster):
                     damages_monster1 = damages_monster(
                         weapon_attack, player_strength, monster_defense)
                     monster.life -= damages_monster1
-                    print_line("La vie du monstre est de " +
-                               str(monster.life) + "\n")
+                    if monster.life > 0:
+                        print_line("La vie du monstre est de " +
+                                str(monster.life) + "\n")
 
                 if monster.life > 0:
                     monster_attack = monster.attacks[monster.choose_attack()]
                     damages_player1 = damages_player(
                         monster_attack, player_defense, armor_defense)
                     player.life -= damages_player1
-                    print_line("Votre vie est de " +
-                               str(player.life_max) + "\n")
+                    if player.life > 0:
+                        print_line("Votre vie est de " +
+                                str(player.life) + "\n")
             if player.life <= 0:
                 print_line("Le monstre a vaincu!\n")
                 game_over(player)
@@ -540,12 +579,13 @@ def credits():
 def exit():
     # quitter le jeu
     return
-# Modifier la conditionnelle pour ne pas afficher une vie négative
-# Inclure les xp nécéssaires pour chaque niveau
-# Modifier le script pour afficher les objets sans le/la/les
-# Modifier les dommageg enccouru au joueur
-# Inclure la map
+    
+
 # Tests avec the fat et the real chuck norris
+# Mdifier "Veuillez choisir une armure"
+# Modifier le script pour afficher les objets sans le/la/les
+
+# Inclure la map
 # Faire les crédits et la redirection vers le début du jeu
 
-princess(classes.Chuck_Norris)
+game(classes.The_Real_Chuck_Norris)
