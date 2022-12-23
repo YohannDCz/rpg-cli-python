@@ -436,8 +436,9 @@ def fight(player, monster):
             player_strength = int(player.strength)
             player_defense = int(player.defense)
             monster_defense = int(monster.defense)
-            armor_defense = int(
-                player.objects['Armor'][player.choose_defense()])
+            defense = player.choose_defense()
+            if defense != None: 
+                armor_defense = int(player.objects['Armor'][defense])
 
             def damages_monster(weapon, strength, defense):
                 damages = round(weapon * (strength + 100) / (defense + 100))

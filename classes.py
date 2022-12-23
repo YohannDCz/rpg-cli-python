@@ -87,15 +87,21 @@ class player:
         if choice == 1:
             print_line(
                 f"Vous venez de récupérer votre/vos {object1.name.lower()}.\n")
-            self.objects["Armor"][object1.name] = object1.defense
-
-            # self.objects["Armor"][object1.name] = object1.defense
+            if self.name != "The Real Chuck Norris":
+                self.objects["Armor"][object1.name] = object1.defense
+            elif self.name == "The Real Chuck Norris":
+                print_line("Mais Chuck Norris n'a pas besoin de se protéger, c'est Chuck Norris!\n")
+            return
         elif choice == 2:
             print_line(
                 f"Vous vous emparez (du/des/de la) {object2.name.lower()}.\n")
-            self.objects["Weapon"].append(object2.name)
-            for key,value in object2.attacks.items():
-                self.attacks[key] = value
+            if self.name != "The Real Chuck Norris":
+                self.objects["Weapon"].append(object2.name)
+                for key,value in object2.attacks.items():
+                    self.attacks[key] = value
+            elif self.name == "The Real Chuck Norris":
+                print_line("Mais Chuck Norris n'en a pas besoin pour vaincre l'adversité.\n")
+            return
         elif choice == 3:
             return
 
@@ -115,7 +121,7 @@ class player:
         return player_attack
 
     def choose_defense(self):
-        if self.obects["Armor"] > 0:
+        if len(self.objects["Armor"]) > 0:
             print_line("Veuillez choisir une armure:\n")
             for key, value in self.objects["Armor"].items():
                 i = list(self.objects["Armor"]).index(key)
@@ -125,6 +131,7 @@ class player:
             print_line("Vous avez choisi " + defense_armor.lower() + "!\n")
             return defense_armor
         else:
+            print_line("Chuck Norris n'a pas besoin d'armure pour rester frais.\n")
             return
 
 
@@ -228,6 +235,9 @@ class potion:
         print("[2] Vous choisissez de l'entreposer dans votre inventaire.")
         print("[3] Vous passez votre chemin.")
         choice = int(input())
+        if player.name == "The Real Chuck Norris" and choice == 1 or choice == 2:
+            print_line("Vous voulez rigoler ou quoi, c'est de la pacotille, the real Chuck Norris n'en a pas besoin. Aller, on continue sans...\n")
+            return
         if choice == 1:
             self.give_life(player)
             print_line("Tout vos points de vie se sont régénérés.\n")
@@ -251,3 +261,5 @@ class potion:
 potion1 = potion("Alcool de comptoir", 0, 50)
 potion2 = potion("Musk discret", 200, 100)
 potion3 = potion("Vin chaud", 400, 300)
+
+potion1.find_potion(The_Real_Chuck_Norris)
