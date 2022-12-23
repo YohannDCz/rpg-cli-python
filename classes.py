@@ -73,7 +73,7 @@ class player:
                     print(f"- {key}: ({value} points de vie).")
                 sleep(0.2)
             elif len(self.objects["Potion"]) == 0:
-                print_line("Vous n'avez pas de portions !\n")
+                print_line("Vous n'avez pas de potions !\n")
             return
 
     def find_object(self, object1, object2):
@@ -87,14 +87,14 @@ class player:
         if choice == 1:
             print_line(
                 f"Vous venez de récupérer votre/vos {object1.name.lower()}.\n")
-            self.objects["Armor"] = {object1.name: object1.defense}
+            self.objects["Armor"][object1.name] = object1.defense
 
             # self.objects["Armor"][object1.name] = object1.defense
         elif choice == 2:
             print_line(
                 f"Vous vous emparez (du/des/de la) {object2.name.lower()}.\n")
             self.objects["Weapon"].append(object2.name)
-            for key, value in object2.attacks.items():
+            for key,value in object2.attacks.items():
                 self.attacks[key] = value
         elif choice == 3:
             return
@@ -115,14 +115,17 @@ class player:
         return player_attack
 
     def choose_defense(self):
-        print_line("Veuillez choisir une armure:\n")
-        for key, value in self.objects["Armor"].items():
-            i = list(self.objects["Armor"]).index(key)
-            print(f"[{i + 1}] {key} ({value} defense).")
-        choice = int(input())
-        defense_armor = list(self.objects["Armor"])[choice-1]
-        print_line("Vous avez choisi " + defense_armor.lower() + "!\n")
-        return defense_armor
+        if self.obects["Armor"] > 0:
+            print_line("Veuillez choisir une armure:\n")
+            for key, value in self.objects["Armor"].items():
+                i = list(self.objects["Armor"]).index(key)
+                print(f"[{i + 1}] {key} ({value} defense).")
+            choice = int(input())
+            defense_armor = list(self.objects["Armor"])[choice-1]
+            print_line("Vous avez choisi " + defense_armor.lower() + "!\n")
+            return defense_armor
+        else:
+            return
 
 
 The_Fat_Chuck_Norris = player("The Fat Chuck Norris", 100, 0, 0, 100, 100, {"Weapon": ["Mauvaise haleine"], "Armor": {
@@ -130,7 +133,7 @@ The_Fat_Chuck_Norris = player("The Fat Chuck Norris", 100, 0, 0, 100, 100, {"Wea
 Chuck_Norris = player("Chuck Norris", 100, 50, 30, 400, 400, {"Weapon": ["Couteau"], "Armor": {
                       "Chuck t-shirt": 10, "Chuck bear": 15}, "Potion": {"Alcool de comptoir": [100, 100]}}, {"Simple slap": 10, "Chuck stab": 25}, 1, 1, 4)
 The_Real_Chuck_Norris = player("The Real Chuck Norris", 1000, 1000, 1000, 1000, 1000, {
-"Weapon": [],"Armor": {}, "Potion": {}}, {"Simple slap", 1000}, 100, 6, 4)
+"Weapon": [],"Armor": {}, "Potion": {}}, {"Simple slap": 1000}, 100, 6, 4)
 
 
 class monster:
@@ -248,6 +251,3 @@ class potion:
 potion1 = potion("Alcool de comptoir", 0, 50)
 potion2 = potion("Musk discret", 200, 100)
 potion3 = potion("Vin chaud", 400, 300)
-
-The_Real_Chuck_Norris.find_object(chapeau, katana)
-The_Real_Chuck_Norris.inventory()
