@@ -231,9 +231,6 @@ def tutorial(player):
     return
 
 
-position = ""
-
-
 def game(player):
 
     map = maps.level1
@@ -284,17 +281,6 @@ def game(player):
     game1(player, maps.level2, x)
     game1(player, maps.level3, x)
 
-    # while player.i > 0 and player.life > 0:
-    #     move1(map, player)
-    # if map.level == 2 and player.i == 0:
-    #     player.i = 7
-    #     map = maps.level3
-    #     map.map[player.i][player.j] = "J "
-    #     print_line(f"Vous êtes au niveau {map.level}.\n")
-    #     # print_line("Voici la map du niveau.\n")
-    # while player.i > 0 and player.life > 0:
-    #     move1(map, player)
-
 # On veut que lorsque le joueur fait un mouvement, la position s'affiche sur la grille
 
 
@@ -304,7 +290,6 @@ def move1(game, player):
     # maps.correction_map(game.displayed)
 
     def move2(game, player):
-        global position
         print_line("Quel déplacement souhaitez vous effectuer ?\n")
         print("Appuyez sur [c] pour afficher les commandes")
         print("Appuyez sur [i] pour afficher l'inventaire.")
@@ -337,7 +322,6 @@ def map1(game, player, move):
     def map2(map, displayed):
         map[player.i][player.j] = "  "
         displayed[player.i][player.j] = "  "
-        position = map[player.i][player.j]
 
     def map3(map, displayed):
         position = map[player.i][player.j]
@@ -581,12 +565,6 @@ def exit():
     # quitter le jeu
     return
     
-
-# Tests avec the fat et the real chuck norris
-# Mdifier "Veuillez choisir une armure"
-# Modifier le script pour afficher les objets sans le/la/les
-
+    
 # Inclure la map
 # Faire les crédits et la redirection vers le début du jeu
-
-game(classes.The_Real_Chuck_Norris)

@@ -79,14 +79,14 @@ class player:
     def find_object(self, object1, object2):
         print_line("Il semble que vous soyez tombé sur des objets !\n")
         print_line(
-            f"[1] Vous ramassez (votre/vos) {object1.name.lower()} qui (est/sont) tombé(es).\n")
+            f"[1] Vous ramassez: {object1.name.lower()} tombé(es) jusqu'alors.\n")
         print_line(
-            f"[2] Vous trouvez (un/une/des) {object2.name.lower()} et vous en profitez pour vous fumer un autre cigar.\n")
+            f"[2] Vous trouvez: {object2.name.lower()} et vous en profitez pour vous fumer un autre cigar.\n")
         print_line(f"[3] Vous passez votre chemin.\n")
         choice = int(input())
         if choice == 1:
             print_line(
-                f"Vous venez de récupérer votre/vos {object1.name.lower()}.\n")
+                f"Vous venez de récupérer: {object1.name.lower()}.\n")
             if self.name != "The Real Chuck Norris":
                 self.objects["Armor"][object1.name] = object1.defense
             elif self.name == "The Real Chuck Norris":
@@ -94,7 +94,7 @@ class player:
             return
         elif choice == 2:
             print_line(
-                f"Vous vous emparez (du/des/de la) {object2.name.lower()}.\n")
+                f"Vous vous emparez de: {object2.name.lower()}.\n")
             if self.name != "The Real Chuck Norris":
                 self.objects["Weapon"].append(object2.name)
                 for key,value in object2.attacks.items():
@@ -261,5 +261,3 @@ class potion:
 potion1 = potion("Alcool de comptoir", 0, 50)
 potion2 = potion("Musk discret", 200, 100)
 potion3 = potion("Vin chaud", 400, 300)
-
-potion1.find_potion(The_Real_Chuck_Norris)
