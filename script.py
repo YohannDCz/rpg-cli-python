@@ -565,6 +565,9 @@ def exit():
     # quitter le jeu
     return
     
-    
+Menu()
+
+# Documenter le code
+# Attribuer des roles pour l'oral
 # Inclure la map
 # Faire les crédits et la redirection vers le début du jeu

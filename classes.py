@@ -138,7 +138,7 @@ class player:
 The_Fat_Chuck_Norris = player("The Fat Chuck Norris", 100, 0, 0, 100, 100, {"Weapon": ["Mauvaise haleine"], "Armor": {
                               "Bedaine alccolisée": 0}, "Potion": {"Cerceuil": 0}}, {"Rot retentissant": 0}, 1, 6, 4)
 Chuck_Norris = player("Chuck Norris", 100, 50, 30, 400, 400, {"Weapon": ["Couteau"], "Armor": {
-                      "Chuck t-shirt": 10, "Chuck bear": 15}, "Potion": {"Alcool de comptoir": [100, 100]}}, {"Simple slap": 10, "Chuck stab": 25}, 1, 1, 4)
+                      "Chuck t-shirt": 10, "Chuck bear": 15}, "Potion": {"Alcool de comptoir": [100, 100]}}, {"Simple slap": 10, "Chuck stab": 25}, 1, 6, 4)
 The_Real_Chuck_Norris = player("The Real Chuck Norris", 1000, 1000, 1000, 1000, 1000, {
 "Weapon": [],"Armor": {}, "Potion": {}}, {"Simple slap": 1000}, 100, 6, 4)
 
