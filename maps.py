@@ -1,5 +1,8 @@
 from time import sleep
 
+# Initiation de la classe ma pour une meilleur manipulation des variables
+# Il y a le nveau de la map, l'experience requis du joueur ainsi que la map
+# de disposition des objets et celle affichée
 
 class maps:
 
@@ -75,6 +78,7 @@ level3 = maps(3, 600,
 ### p = potion
 
 
+# Ici une fonction pour afficher la map avec les numéro des colonnes et des lignes
 def display_map(map):
 
     column_header = ["0 ", "1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ", "8 "]
@@ -88,7 +92,8 @@ def display_map(map):
         a = " | ".join(map[y])
         print(a)
 
-
+# Ici, une fonction pour corriger l'utilisation de la première fonction
+# (la console afiche une grille de numero dans une grille de numero autrement)
 def correction_map(map):
 
     del map[0]
