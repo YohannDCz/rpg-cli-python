@@ -2,9 +2,9 @@
 #   Partie 6
 ##############################################################
 
-# Dan ce fichier, nous allons voir les classes auxquelles
-# fait référence un bon nombre de fonction du fichier script.py
-# L'INTÉGRALITÉ des classes se toruve ici:
+# Dans ce fichier, nous allons voir les classes auxquelles
+# fait référence un bon nombre de fonctions du fichier script.py
+# L'INTÉGRALITÉ des classes se trouve ici:
 #   - player (+3 instances de players).
 #   - monster (+5 instances de monsters).
 #   - weapon (+6 instance de weapons, avec 3 attaques chacunes).
@@ -89,8 +89,8 @@ class player:
                 print_line("Vous n'avez pas d'armes !\n")
             if len(self.objects["Armor"]) > 0:
                 print_line("Vous avez comme protections:\n")
-                # on crée une liste bi-dimensionnelle d'items key, items valeur et
-                # on itérère à travers ce dernier.
+                # On crée une liste bi-dimensionnelle d'items key, items valeur et
+                # On itérère à travers ce dernier.
                 for key, value in self.objects["Armor"].items():
                     print(f"- {key}: ({value} défense).")
                 sleep(0.2)
@@ -99,18 +99,18 @@ class player:
                 print_line("Vous n'avez pas de protections !\n")
             if len(self.objects["Potion"]) > 0:
                 print_line("Vous avez comme potions:\n")
-                # Mème schéms que les items d'are et d'armures.
+                # Mème schémas que les items d'arme et d'armures.
                 for key, value in self.objects["Potion"].items():
-                    # on itérère à travers ce dernier.
+                    # on itère à travers ce dernier.
                     print(f"- {key}: ({value} points de vie).")
                 sleep(0.2)
-            # Si le joueur n'a pas de potions l'afficher
+            # Si le joueur n'a pas de potionsm l'afficher.
             elif len(self.objects["Potion"]) == 0:
                 print_line("Vous n'avez pas de potions !\n")
             return
 
     def find_object(self, object1, object2):
-        # Texte à choix multiple
+        # Texte à choix multiple.
         print_line("Il semble que vous soyez tombé sur des objets !\n")
         print_line(
             f"[1] Vous ramassez: {object1.name.lower()} tombé(es) jusqu'alors.\n")
@@ -195,7 +195,7 @@ class player:
             return
 
 
-# Ici les trois mode de dificulté, toutes trois instances de player
+# Ici les trois mode de dificulté, toutes trois instances de player.
 The_Fat_Chuck_Norris = player("The Fat Chuck Norris", 100, 0, 0, 100, 100, {"Weapon": ["Mauvaise haleine"], "Armor": {
                               "Bedaine alccolisée": 0}, "Potion": {"Cerceuil": 0}}, {"Rot retentissant": 0}, 1, 6, 4)
 Chuck_Norris = player("Chuck Norris", 100, 50, 30, 400, 400, {"Weapon": ["Couteau"], "Armor": {
@@ -235,7 +235,7 @@ class monster:
         return monster_attack
 
 
-# Ici plusieurs instance de monster
+# Ici plusieurs instances de monster
 scarabee = monster("un scarabee", 100, 10, 30, 100, {
                    "Charge": 15, "Battements d'ailes": 20, "Transmet le Chagas": 30}, 100)
 piranha = monster("un piranha", 200, 20, 40, 200, {
@@ -260,7 +260,7 @@ class weapon:
         self.attacks = attacks
 
 
-# Ici plusieur instances d'armes
+# Ici plusieurs instances d'armes
 couteau = weapon("Couteau", {"Chuck stab": 20})
 katana = weapon("Katana", {"Katana strike": 30, "Deep stab": 35})
 beretta = weapon("Beretta 92FS", {"Coup de crosse": 35, "Tir": 40})
@@ -269,10 +269,10 @@ l_grenade = weapon("Lanceur de greande M79", {
                    "Petites grenades": 55, "Grosses grenades": 60})
 cuillere = weapon("Cuillère", {"Lancer la cuillère": "?"})
 
+
 # Création de la classe "armor" pour les différentes armures
 # Chacune d'entre elles ont une variable defense, qui sera importante dans
 # le calcul des dommage du montstre sur le player
-
 
 class armor:
 
@@ -281,18 +281,18 @@ class armor:
         self.defense = defense
 
 
-# Ici plusieur instances d'armures
+# Ici plusieurs instances d'armures
 chapeau = armor("Chapeau", 15)
 ceinture = armor("Ceinture en cuir", 25)
 jean = armor("Jean denim", 30)
 rangers = armor("Rangers", 50)
 pickup = armor("Pick-up", 100)
 
+
 # Création de la classe potion
 # Les méthodes ont pour fonction de trouver une potion, de régénérer
-# less point de vie, d'étendre la vie max, ou encore de donner de
+# les points de vie, d'étendre la vie max, ou encore de donner de
 # l'experience au joueur.
-
 
 class potion:
 
@@ -335,13 +335,13 @@ class potion:
             # Pour toutes les potions, régénérer la vie et afficher le message
             self.give_life(player)
             print_line("Tout vos points de vie se sont régénérés.\n")
-            # Autrement dis si la potion n'est pas "Alccol de comptoir"
+            # Autrement dit si la potion n'est pas "Alcool de comptoir"
             # (c'est la seule qui ne donne pas de vie supplémentaire)
             if self.give_life_max > 0:
                 self.give_life_max1(player)
                 print_line(
                     f"Maintenant, vous avez même {self.give_life_max} points de vie en plus!\n")
-            # Pour toutes les potions, afficher les XP récupéré
+            # Pour toutes les potions, afficher les XP récupérés
             self.receive_xp(player)
             print_line(f"La potion vous a rapporté {self.give_xp}XP !\n")
             print_line(

@@ -1,6 +1,6 @@
 from time import sleep
 
-# Initiation de la classe ma pour une meilleur manipulation des variables
+# Initiation de la classe map pour une meilleur manipulation des variables
 # Il y a le nveau de la map, l'experience requis du joueur ainsi que la map
 # de disposition des objets et celle affichée
 

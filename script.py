@@ -2,7 +2,7 @@
 #   Partie 1
 ##############################################################
 
-## Import des deux autres fichiers et de lu module 
+## Import des deux autres fichiers et du module 
 ## sleep de la bibliothèque time et du module sys
 ## permettant d'afficher le texte en filigrane.
 
@@ -52,7 +52,7 @@ def game_title():
     print("\n")
     sleep(0.75)
 
-# Transition de bas en haut, pour les comabts et les objets touvés,
+# Transition de bas en haut, pour les combats et les objets touvés,
 # toujours avec un sleep() intermittant. 
 def curtains():
 
@@ -76,7 +76,7 @@ def curtains():
 # Entre deux affichage, on flush l'output du print afin d'afficher une lettre.
 # Enfin, on freeze 0.03s entre deux nettoyage de buffer et affichage des lettres
 # afin de reproduire l'effet filigrane.
-# Arpès chaque ligne, on freeze l'affihagede la ligne termniée pour afficher les 
+# Arpès chaque ligne, on freeze l'affichage de la ligne termniée pour afficher les 
 # lignes avec un interval de 0.2 s.
 
 def print_line(txt):
@@ -88,7 +88,7 @@ def print_line(txt):
     sleep(0.4)
 
 
-# Repose sur le mème principe sauf qu'on freeze 0.2s entree chaque lettre afin 
+# Repose sur le mème principe sauf qu'on freeze 0.2s entre chaque lettre afin 
 # de reproduire l'effet "barre de chargement".
 
 def loading_bar(txt):
@@ -145,8 +145,8 @@ def Menu():
     print("3: Voir les commandes")
     # Stockage de la variable choice via un input.
     choice = int(input())
-    # Attribution par défault player à "Chuck Norris"
-    # (nous verrons plus tard qu'il y a plusieur modes).
+    # Attribution par défault du player à "Chuck Norris"
+    # (nous verrons plus tard qu'il y a plusieurs modes).
     player = classes.Chuck_Norris
     # Si le joueur choisit de charger le jeu on le démarre.
     if choice == 1:
@@ -173,7 +173,7 @@ def Menu():
         Menu()
         return
 
-# Les commandes sont simpes pour ce jeu, il s'agit de se déplacer selon
+# Les commandes sont simples pour ce jeu, il s'agit de se déplacer selon
 # les points cardinaux et non selon l'orientation propre du joueur.
 def commandes():
 
@@ -201,7 +201,7 @@ def difficulte():
 
 # Cette fonction est la fonction qui permet de lancer le jeu.
 # Appelée à partir de Menu(), start_game() permet d'initialiser le jeu,
-# et notamment en lancant le chargement du jeu, en colectant le nom de 
+# et notamment en lancant le chargement du jeu, en collectant le nom de 
 # l'utilisateur pour un usage direct et ultérieur, de poser le contexte 
 # textuellement ainsi que le tutoriel et le jeu brut. 
 def start_game(player):
@@ -240,9 +240,8 @@ def load_game():
 
 # Fonction que l'on découvre dans tout les RPG des années 90: un tutoriel !
 # Celui-ci consiste à voir si Chuck saura réparer son couteau avant de partir 
-# pour de nouvelles aventures. Les redirection rendent obligatoire la passation
+# pour de nouvelles aventures. Les redirections rendent obligatoire la passation
 # de cette partie.
-### Cmmenter plus en détails les les éléments de la fonction.
 def tutorial(player):
 
     print_line("Mais voilà, vous êtes face à un dilemme:\n")
@@ -271,7 +270,7 @@ def tutorial(player):
                     print_line("Voici 20 points d'XP!\n")
                     experience = player.receive_xp(20)
                     print_line(f"Vous avez maintenant {experience} XP.\n")
-                # Sinon on affiche un texte et on relance le jeu.
+                # Sinon on affiche un texte et on relance le tutoriel.
                 elif choice2 == 2:
                     print_line(
                         "Erreur: Il n'y a pas de glue à 30km à la ronde\n")
@@ -346,7 +345,7 @@ def game(player):
                         game1(player, map, x)
                         return
                     elif choice == "non":
-                        game_over() # Lafonction exit serait mieux.
+                        game_over() # La fonction exit serait mieux.
                         return
                     else:
                         print_line("Je n'ai pas compris !\n")
@@ -428,7 +427,7 @@ def map1(game, player, move):
 
     if move == "z":
         map2(map1, displayed)
-        # Change les coordonnée du joueur.
+        # Change les coordonnées du joueur.
         player.i -= 1
         map3(map1, displayed)
     elif move == "s":
@@ -479,7 +478,7 @@ def position1(player, position):
         return
     elif position[0] == "p":
         if position[1] == "1":
-            # Invoque la méthode find_potion(player) des potion du fichier classes.
+            # Invoque la méthode find_potion(player) des potions du fichier classes.py.
             classes.potion1.find_potion(player)
         elif position[1] == "2":
             classes.potion2.find_potion(player)
@@ -487,7 +486,7 @@ def position1(player, position):
             classes.potion3.find_potion(player)
         return
     elif position == "P ":
-        # Invoque le sce2nario de la princesse.
+        # Invoque le scénario de la princesse.
         princess(player)
         return
     elif position == "l ":
@@ -551,20 +550,20 @@ def fight(player, monster):
                 damages = round(weapon * (strength + 100) / (defense + 100))
                 return damages
 
-            # Ici celle du player
+            # Ici celle du player.
             def damages_player(attack, defense, armor):
                 damages = round(1000 * (attack + 100) /
                                 (armor * (defense + 100)))
                 return damages
 
-            # Tant que la vie du joueur ou du monstre sont positifs, renouveller les attaques
+            # Tant que la vie du joueur ou du monstre sont positifs, renouveler les attaques.
             while player.life > 0 and monster.life > 0:
                 if player.life > 0:
                     # L'attaque de l'arme est la valeur de la clé obtenue a partir de choose_attack dans player.attack[].
                     weapon_attack = int(player.attacks[player.choose_attack()])
                     damages_monster1 = damages_monster(
                         weapon_attack, player_strength, monster_defense)
-                    # Les dommage monster sont imputés à la vie du monstre.
+                    # Les dommages monster sont imputés à la vie du monstre.
                     monster.life -= damages_monster1
                     # Affiche la vie du monstre si celui-ci est encore en vie.
                     if monster.life > 0:
@@ -576,7 +575,7 @@ def fight(player, monster):
                     monster_attack = monster.attacks[monster.choose_attack()]
                     damages_player1 = damages_player(
                         monster_attack, player_defense, armor_defense)
-                    # De mêe, les dommages du player sont imputés à la vie duplayer.
+                    # De même, les dommages du player sont imputés à la vie du player.
                     player.life -= damages_player1
                     # Affiche la vie du player si celui-ci est encore en vie.
                     if player.life > 0:
@@ -598,30 +597,30 @@ def fight(player, monster):
         # Choix de guérison
         elif choice == 3:
             potions = player.objects["Potion"]
-            # Si le nombre de potions est supérieur à 0: afficher toutes les potions
+            # Si le nombre de potions est supérieur à 0: afficher toutes les potions.
             if len(potions) > 0:
                 print_line("Vous avez comme potions:\n")
                 for key, value in potions.items():
                     # :à bien avoir compris:
                     i = list(potions).index(key)
-                    # Si la potion se contente seulement de régénérer les points de vie
+                    # Si la potion se contente seulement de régénérer les points de vie.
                     if value[0] == 0:
                         print(f"[{i+1}] {key}: régénère tout les points de vie")
-                    # Si la potion attribue des points de vie_max
+                    # Si la potion attribue des points de vie_max.
                     elif value[0] > 0:
                         print(
                             f"[{i+1}] {key}: régénère et rajoute {value[0]} points de vie.")
                 choice = int(input())
-                # Choisi la potion à l'index i de la liste de potions, grace à list() qui la transforme en liste
+                # Choisi la potion à l'index i de la liste de potions, grace à list() qui la transforme en liste.
                 potion = list(potions)[choice-1]
-                # Regenre les points de vie et ajoute de l'experience
+                # Régénère les points de vie et ajoute de l'experience.
                 player.life = player.life_max
                 player.experience += potions[potion][1]
                 print_line("Tout vos points de vie se sont régénérés.\n")
-                # Si la potion attribue des points de vie_max
+                # Si la potion attribue des points de vie_max, les attribuer.
                 if potions[potion][0] > 0:
                     player.life_max += potions[potion][0]
-                # Affiche ce que nous a apporté la potion
+                # Affiche ce que nous a apporté la potion.
                     print_line(
                         f"Maintenant, vous avez même {potions[potion][0]} points de vie en plus!\n")
                 print_line(
@@ -634,7 +633,7 @@ def fight(player, monster):
                 print_line("Vous n'avez pas de potion !\n")
             fight2(player, monster)
 
-        # Condition de répétition de la fonction
+        # Condition de répétition de la fonction.
         else:
             print_line("Je n'ai pas compris !")
             fight2(player, monster)
@@ -656,12 +655,12 @@ def princess(player):
         "[2] Vous vous emparez de votre pickup est vous faites demi-tour.\n")
     print_line("[3] Vous en profitez pour lui fournir un cigar.\n")
 
-    # Bon vieux choix à l'ancienne
+    # Bon vieux choix à l'ancienne.
     choice = int(input())
     if choice == 1:
         win(player)
     elif choice == 2:
-        # Réatribue les coordonnêes du joueur de début et lui ajoute son pick-up
+        # Réattribue les coordonnêes du joueur de début et lui ajoute son pick-up.
         player.i = 6
         player.j = 4
         player.objects["Armor"]["Pick-up"] = 100
@@ -672,7 +671,7 @@ def princess(player):
         win(player)
     return
 
-    # Texte de win subtil
+    # Texte de win subtil.
 def win(player):
     print_line("La partie est finie.\n")
     print_line("Scaraouche, scaramouche, une fois de plus, vous avez prouvé votre talent d'aventurier grâce à vos nerf d'acier et à un mental en metal, ou peut-être l'inverse!\n")
@@ -684,7 +683,7 @@ def win(player):
     # save_map()
     return
 
-    # Texte de loose encore plus subtil
+    # Texte de loose encore plus subtil.
 def game_over(player):
     curtains()
     print_line("Game Over.")
@@ -715,7 +714,5 @@ def exit():
     
 Menu()
 
-# Documenter le code
-# Attribuer des roles pour l'oral
 # Inclure la map
 # Faire les crédits et la redirection vers le début du jeu
