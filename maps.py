@@ -29,7 +29,7 @@ level1 = maps(1, 0,
                ["l ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "l "],
                ["l ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "l "],
                ["l ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "l "],
-               ["l ", "  ", "  ", "  ", "J ", "  ", "  ", "  ", "l "],
+               ["l ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "l "],
                ["  ", "l ", "l ", "l ", "l ", "l ", "l ", "l ", "  "]])
 
 level2 = maps(2, 300,
@@ -72,38 +72,17 @@ level3 = maps(3, 600,
 
 ### J = Joueur
 ### P = Princesse
-# l = limite de jeu.9=
+### l = limite de jeu.9=
 ### o = objet
 ### e = ennemi
 ### p = potion
 
 
-# Ici une fonction pour afficher la map avec les numéro des colonnes et des lignes
+# Ici une fonction pour afficher la map
 def display_map(map):
-
-    column_header = ["0 ", "1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ", "8 "]
-    map.insert(0, column_header)
-    for i in range(0, 9):
-        map[i].insert(0, str(i - 1))
     for y in range(len(map)):
-        b = "-----------------------------------------------"
+        b = "-------------------------------------------"
         print(b)
         sleep(0.05)
         a = " | ".join(map[y])
         print(a)
-
-# Ici, une fonction pour corriger l'utilisation de la première fonction
-# (la console afiche une grille de numero dans une grille de numero autrement)
-def correction_map(map):
-
-    del map[0]
-    for i in range(0, 8):
-        del map[i][0]
-    return map
-
-# display_map(level3.map)
-# print("\n")
-# display_map(level2.map)
-# print("\n")
-# display_map(level1.map)
-# print("\n")

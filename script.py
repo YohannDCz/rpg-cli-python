@@ -98,9 +98,8 @@ def loading_bar(txt):
         sys.stdout.flush()
         sleep(0.2)
 
-print_line("Ahahahah")
-name = ''
 
+name = ''
 
 # Entrer une explication de la fonction.
 def ask_name():
@@ -304,7 +303,10 @@ def game(player):
     map = maps.level1
     print_line(f"Vous êtes au niveau {map.level}.\n")
     x = 1
-    # print_line("Voici la map du niveau.\n")
+    print_line("Voici la map du niveau.\n")
+    map.map[player.i][player.j] = "J "
+    map.displayed[player.i][player.j] = "J "
+    maps.display_map(map.displayed)
     def game1(player, map, x):
         # Tant que le joueur n'a pas franchit le deuxième niveau (player.i == 0)
         # et qu'il est en vie, répéter la proposition de bouger (move1()).
@@ -325,8 +327,10 @@ def game(player):
                 player.i = 7
                 # Inscrit le joueur sur la case (pour une fonctionallité prochaine).
                 map.map[player.i][player.j] = "J "
+                map.displayed[player.i][player.j] = "J "
                 print_line(f"Vous êtes au niveau {map.level}.\n")
-                # print_line("Voici la map du niveau.\n")
+                print_line("Voici la map du niveau.\n")
+                maps.display_map(map.displayed)
             else:
                 # Modifie le x actuel et set la map au niveau inferieur.
                 if x == 2:
@@ -340,7 +344,11 @@ def game(player):
                     print_line("Voulez vous redémarrer le niveau ? (oui/non)")
                     choice = str(input())
                     if choice == "oui":
+                        map.map[player.i][player.j] = "  "
+                        map.displayed[player.i][player.j] = "  "
                         player.i = 6
+                        map.map[player.i][player.j] = "J "
+                        map.displayed[player.i][player.j] = "J "
                         print_line("Vous venez de redémarrer le niveau.\n")
                         game1(player, map, x)
                         return
@@ -367,9 +375,6 @@ def game(player):
 # code vu plus haut. Elle permet aussi de voir les commandes et 
 # d'afficher l'inventaire.
 def move1(game, player):
-
-    # maps.display_map(game.displayed)
-    # maps.correction_map(game.displayed)
 
     def move2(game, player):
         print_line("Quel déplacement souhaitez vous effectuer ?\n")
@@ -402,17 +407,20 @@ def map1(game, player, move):
     map = game.map
     map1 = map
     displayed = game.displayed
+    map[player.i][player.j] = "J "
+    displayed[player.i][player.j] = "J "
     move.lower()
 
     # Notons que le code répétitif est encadré par 2 sous-fonctions.
     def map2(map, displayed):
         map[player.i][player.j] = "  "
-        displayed[player.i][player.j] = "  "
+        displayed[player.i][player.j] = f"{player.position}"
 
     def map3(map, displayed):
         # La variable position récupère le contenu d'une case 
         # (o1, o2, o3, o4 ,o5, e1, e2, e3, e4, e5, p1, p2, p3, l, P).
         position = map[player.i][player.j]
+        player.position = position
         # Supprime le contenue d'une ligne pour éviter de retomber 
         # sur les mêmes objets en tournant à droite ou a gauhe sur la même ligne
         # après avoir découvert un item.
@@ -430,18 +438,22 @@ def map1(game, player, move):
         # Change les coordonnées du joueur.
         player.i -= 1
         map3(map1, displayed)
+        maps.display_map(game.displayed)
     elif move == "s":
         map2(map1, displayed)
         player.i += 1
         map3(map1, displayed)
+        maps.display_map(game.displayed)
     elif move == "q":
         map2(map1, displayed)
         player.j -= 1
         map3(map1, displayed)
+        maps.display_map(game.displayed)
     elif move == "d":
         map2(map1, displayed)
         player.j += 1
         map3(map1, displayed)
+        maps.display_map(game.displayed)
     return
 
 # Cette fonction permet d'invoquer telle ou telle fonction en 
@@ -711,8 +723,9 @@ def credits():
 def exit():
     # quitter le jeu
     return
-    
-Menu()
+
+game(classes.Chuck_Norris)
+# Menu()
 
 # Inclure la map
 # Faire les crédits et la redirection vers le début du jeu

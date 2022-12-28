@@ -52,7 +52,7 @@ def curtains():
 
 class player:
     # Constructuer de la classe player.
-    def __init__(self, name, experience, strength, defense, life, life_max, objects, attacks, level, i, j):
+    def __init__(self, name, experience, strength, defense, life, life_max, objects, attacks, level, i, j, position):
         self.name = name
         self.experience = experience
         self.strength = strength
@@ -64,6 +64,7 @@ class player:
         self.level = level
         self.i = i
         self.j = j
+        self.position = position
 
     # Fonction de transmission de l'experience.
     def receive_xp(self, give_experience):
@@ -151,11 +152,14 @@ class player:
         # Autrement, retourner rien.
         elif choice == 3:
             return
+        else:
+            print_line("Je n'ai pas compris !\n")
+            self.find_object(object1, object2)
 
     # Méthode qui sert à séduire la princesse
     def find_ring(self):
-        print_line("Il semblerai que vous soyez tombé sur un easter egg !")
-        print_line("Une bague d fiancaille, allez savoir pourquoi...")
+        print_line("Il semblerai que vous soyez tombé sur un easter egg !\n")
+        print_line("Une bague d fiancaille, allez savoir pourquoi...\n")
         self.object.append("Ring")
 
     # Méthode qui sert à choisir l'attaque parmis le dictionnaire player.attacks
@@ -185,9 +189,13 @@ class player:
             choice = int(input())
             # Stock le nom de l'armure dans la variable defense_armor,
             # sera réutilisé plus tard pour extraire les points de défense du joueur.
-            defense_armor = list(self.objects["Armor"])[choice-1]
-            print_line("Vous avez choisi " + defense_armor.lower() + "!\n")
-            return defense_armor
+            if choice - 1 <= len(self.objects["Armor"]):
+                defense_armor = list(self.objects["Armor"])[choice-1]
+                print_line("Vous avez choisi " + defense_armor.lower() + "!\n")
+                return defense_armor
+            else:
+                print_line("Je n'ai pas compris !\n")
+                self.choose_defense()
         # Condition "The Real Chuck Norris"
         else:
             print_line(
@@ -197,11 +205,11 @@ class player:
 
 # Ici les trois mode de dificulté, toutes trois instances de player.
 The_Fat_Chuck_Norris = player("The Fat Chuck Norris", 100, 0, 0, 100, 100, {"Weapon": ["Mauvaise haleine"], "Armor": {
-                              "Bedaine alccolisée": 0}, "Potion": {"Cerceuil": 0}}, {"Rot retentissant": 0}, 1, 6, 4)
+                              "Bedaine alccolisée": 0}, "Potion": {"Cerceuil": 0}}, {"Rot retentissant": 0}, 1, 6, 4, "  ")
 Chuck_Norris = player("Chuck Norris", 100, 50, 30, 400, 400, {"Weapon": ["Couteau"], "Armor": {
-                      "Chuck t-shirt": 10, "Chuck bear": 15}, "Potion": {"Alcool de comptoir": [100, 100]}}, {"Simple slap": 10, "Chuck stab": 25}, 1, 6, 4)
+                      "Chuck t-shirt": 15, "Chuck bear": 25}, "Potion": {"Alcool de comptoir": [100, 100]}}, {"Simple slap": 10, "Chuck stab": 25}, 1, 6, 4, "  ")
 The_Real_Chuck_Norris = player("The Real Chuck Norris", 1000, 1000, 1000, 1000, 1000, {
-    "Weapon": [], "Armor": {}, "Potion": {}}, {"Simple slap": 1000}, 100, 6, 4)
+    "Weapon": [], "Armor": {}, "Potion": {}}, {"Simple slap": 1000}, 100, 6, 4, "  ")
 
 
 class monster:
@@ -282,10 +290,10 @@ class armor:
 
 
 # Ici plusieurs instances d'armures
-chapeau = armor("Chapeau", 15)
-ceinture = armor("Ceinture en cuir", 25)
-jean = armor("Jean denim", 30)
-rangers = armor("Rangers", 50)
+chapeau = armor("Chapeau", 30)
+ceinture = armor("Ceinture en cuir", 45)
+jean = armor("Jean denim", 55)
+rangers = armor("Rangers", 75)
 pickup = armor("Pick-up", 100)
 
 
@@ -355,6 +363,9 @@ class potion:
         # Le choix de ne rien faire
         elif choice == 3:
             return
+        else:
+            print_line("Je n'ai pas compris !\n")
+            self.find_potion(player)
         return
 
 
