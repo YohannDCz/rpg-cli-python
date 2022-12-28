@@ -2,18 +2,20 @@
 #   Partie 1
 ##############################################################
 
-## Import des deux autres fichiers et du module 
-## sleep de la bibliothèque time et du module sys
-## permettant d'afficher le texte en filigrane.
+# Import des deux autres fichiers et du module
+# sleep de la bibliothèque time et du module sys
+# permettant d'afficher le texte en filigrane.
 
 import classes
 import maps
 from time import sleep
 import sys
 
-# Titre principal du jeu, qui s'affiche de bas en haut gràce à la 
+# Titre principal du jeu, qui s'affiche de bas en haut gràce à la
 # fonction sleep intermittante, c'est elle qui va microgeler chaque ligne
 # de l'écran d'introduction du jeu.
+
+
 def game_title():
 
     print("\n")
@@ -53,7 +55,9 @@ def game_title():
     sleep(0.75)
 
 # Transition de bas en haut, pour les combats et les objets touvés,
-# toujours avec un sleep() intermittant. 
+# toujours avec un sleep() intermittant.
+
+
 def curtains():
 
     print("#################################################")
@@ -76,8 +80,9 @@ def curtains():
 # Entre deux affichage, on flush l'output du print afin d'afficher une lettre.
 # Enfin, on freeze 0.03s entre deux nettoyage de buffer et affichage des lettres
 # afin de reproduire l'effet filigrane.
-# Arpès chaque ligne, on freeze l'affichage de la ligne termniée pour afficher les 
+# Arpès chaque ligne, on freeze l'affichage de la ligne termniée pour afficher les
 # lignes avec un interval de 0.2 s.
+
 
 def print_line(txt):
 
@@ -88,7 +93,7 @@ def print_line(txt):
     sleep(0.4)
 
 
-# Repose sur le mème principe sauf qu'on freeze 0.2s entre chaque lettre afin 
+# Repose sur le mème principe sauf qu'on freeze 0.2s entre chaque lettre afin
 # de reproduire l'effet "barre de chargement".
 
 def loading_bar(txt):
@@ -102,6 +107,8 @@ def loading_bar(txt):
 name = ''
 
 # Entrer une explication de la fonction.
+
+
 def ask_name():
 
     print_line("Quel est votre nom ?\n")
@@ -134,8 +141,10 @@ def ask_name():
 ###########################################################
 
 # Le menu est la partie la plus importante du programme parcequ'elle
-# va permettre de centraliser le début du jeu et permettre au joueur de 
+# va permettre de centraliser le début du jeu et permettre au joueur de
 # personaliser la difficulté, de voir les commandes ou de lancer le jeu.
+
+
 def Menu():
     # Choix multiple de départ
     print_line("Que souhaitez vous faire ?\n")
@@ -174,6 +183,8 @@ def Menu():
 
 # Les commandes sont simples pour ce jeu, il s'agit de se déplacer selon
 # les points cardinaux et non selon l'orientation propre du joueur.
+
+
 def commandes():
 
     print_line("Vous pouvez choisir:\n")
@@ -182,8 +193,10 @@ def commandes():
     print("- [q] pour aller vers l'ouest")
     print("- [d] pour aller vers l'est")
 
-# La difficulté peut être choisie: que ce soit Chuck Norris, The Fat Chuck Norris, 
+# La difficulté peut être choisie: que ce soit Chuck Norris, The Fat Chuck Norris,
 # ou encore The Real Chuck Norris, l'utillisateur se régale et passe un bon moment.
+
+
 def difficulte():
 
     print_line(
@@ -200,9 +213,9 @@ def difficulte():
 
 # Cette fonction est la fonction qui permet de lancer le jeu.
 # Appelée à partir de Menu(), start_game() permet d'initialiser le jeu,
-# et notamment en lancant le chargement du jeu, en collectant le nom de 
-# l'utilisateur pour un usage direct et ultérieur, de poser le contexte 
-# textuellement ainsi que le tutoriel et le jeu brut. 
+# et notamment en lancant le chargement du jeu, en collectant le nom de
+# l'utilisateur pour un usage direct et ultérieur, de poser le contexte
+# textuellement ainsi que le tutoriel et le jeu brut.
 def start_game(player):
 
     load_game()
@@ -220,9 +233,11 @@ def start_game(player):
     tutorial(player)
     game(player)
 
-# Lancement de la partie avec l'écran principal du jeu, un cours texte de chargement 
+# Lancement de la partie avec l'écran principal du jeu, un cours texte de chargement
 # ainsi qu'une barre de chargement mise en effet avec la fonction loading_bar décrite
 # ci-dessus.
+
+
 def load_game():
 
     game_title()
@@ -238,7 +253,7 @@ def load_game():
 ###########################################################
 
 # Fonction que l'on découvre dans tout les RPG des années 90: un tutoriel !
-# Celui-ci consiste à voir si Chuck saura réparer son couteau avant de partir 
+# Celui-ci consiste à voir si Chuck saura réparer son couteau avant de partir
 # pour de nouvelles aventures. Les redirections rendent obligatoire la passation
 # de cette partie.
 def tutorial(player):
@@ -248,6 +263,7 @@ def tutorial(player):
         "Votre couteau est cassé et vous vous demandez si vous devez continuer sans...\n")
     # Creation de plusieurs fonctions et sous-fonctions afin de découper les parties répétées.
     # en un jeu clair et jouable.
+
     def tutorial1(player):
         print_line("Que choisissez-vous ?\n")
         print("1: Réparer le couteau")
@@ -257,6 +273,7 @@ def tutorial(player):
         if choice == 1:
             print_line("Vous avez choisi de réparer le couteau, bon choix.\n")
             # On lance un fonction qui permet de choisir avec quoi on le répare.
+
             def tutorial2(player):
                 print_line("Avec quoi voulez vous le réparer?\n")
                 print("1: Utiliser une cordelette")
@@ -294,10 +311,12 @@ def tutorial(player):
     return
 
 # La fonction game est la fonction centrale de ce jeu.
-# Elle permer d'invoquer la fonction move() tant que le player n'a pas atteint l'une 
+# Elle permer d'invoquer la fonction move() tant que le player n'a pas atteint l'une
 # des dernières case du niveau actuel, et d'upgrader la map au niveau superieur
 # ainsi que de resetter la position i (lignes) du joueur pour qu'il apparaisse
 # au début de la map et non à la fin.
+
+
 def game(player):
 
     map = maps.level1
@@ -307,6 +326,7 @@ def game(player):
     map.map[player.i][player.j] = "J "
     map.displayed[player.i][player.j] = "J "
     maps.display_map(map.displayed)
+
     def game1(player, map, x):
         # Tant que le joueur n'a pas franchit le deuxième niveau (player.i == 0)
         # et qu'il est en vie, répéter la proposition de bouger (move1()).
@@ -320,8 +340,9 @@ def game(player):
             elif x == 1:
                 map = maps.level2
                 x += 1
-            print_line(f"Vous avez {player.experience}XP. ") 
-            print_line(f"Le nombre d'XP requis pour passer le niveau est de {map.experience}XP.\n")
+            print_line(f"Vous avez {player.experience}XP. ")
+            print_line(
+                f"Le nombre d'XP requis pour passer le niveau est de {map.experience}XP.\n")
             if player.experience >= map.experience:
                 # Reset la position du joueur sur la derniere ligne du niveau suivant.
                 player.i = 7
@@ -340,6 +361,7 @@ def game(player):
                     x -= 1
                     map = maps.level2
                 # Fonction de restart
+
                 def restart():
                     print_line("Voulez vous redémarrer le niveau ? (oui/non)")
                     choice = str(input())
@@ -351,9 +373,10 @@ def game(player):
                         map.displayed[player.i][player.j] = "J "
                         print_line("Vous venez de redémarrer le niveau.\n")
                         game1(player, map, x)
+                        reset_map()
                         return
                     elif choice == "non":
-                        game_over() # La fonction exit serait mieux.
+                        game_over()
                         return
                     else:
                         print_line("Je n'ai pas compris !\n")
@@ -371,9 +394,11 @@ def game(player):
 #   Partie 4
 ###########################################################
 
-# Permet au joueur de se mouvoir sur la map avec les commandes du 
-# code vu plus haut. Elle permet aussi de voir les commandes et 
+# Permet au joueur de se mouvoir sur la map avec les commandes du
+# code vu plus haut. Elle permet aussi de voir les commandes et
 # d'afficher l'inventaire.
+
+
 def move1(game, player):
 
     def move2(game, player):
@@ -400,6 +425,8 @@ def move1(game, player):
     return
 
 # Permet de retransrire les mouvements du joueur sur la carte.
+
+
 def map1(game, player, move):
     # On essaie de créer une variable qui puisse afficher la position du joueur sur la map
     # et qui imprime la position d'un objet/ennemi découvert.
@@ -417,11 +444,11 @@ def map1(game, player, move):
         displayed[player.i][player.j] = f"{player.position}"
 
     def map3(map, displayed):
-        # La variable position récupère le contenu d'une case 
+        # La variable position récupère le contenu d'une case
         # (o1, o2, o3, o4 ,o5, e1, e2, e3, e4, e5, p1, p2, p3, l, P).
         position = map[player.i][player.j]
         player.position = position
-        # Supprime le contenue d'une ligne pour éviter de retomber 
+        # Supprime le contenue d'une ligne pour éviter de retomber
         # sur les mêmes objets en tournant à droite ou a gauhe sur la même ligne
         # après avoir découvert un item.
         for x in range(1, len(map[player.i])-1):
@@ -429,7 +456,7 @@ def map1(game, player, move):
         # Case la nouvelle position du joueur.
         map[player.i][player.j] = "J "
         displayed[player.i][player.j] = "J "
-        # Invoque la fonction position1() pour opérer sur les items découverts 
+        # Invoque la fonction position1() pour opérer sur les items découverts
         # chacun associé à une fonction spéicifique.
         position1(player, position)
 
@@ -456,8 +483,10 @@ def map1(game, player, move):
         maps.display_map(game.displayed)
     return
 
-# Cette fonction permet d'invoquer telle ou telle fonction en 
+# Cette fonction permet d'invoquer telle ou telle fonction en
 # fonction de ce qui est inscrit dans cette case de la map du niveau.
+
+
 def position1(player, position):
 
     if position == "  ":
@@ -519,10 +548,12 @@ def position1(player, position):
 # Fonction de combat
 # Lorsque le player passe devant un ennemi, il a le choix entre 3 options...
 # La première est de contourner, ce qui affiche un texte et ferme la fonction
-# La seconde est l'option combattre, dans laquelle on attribue au variable 
-# de combat, des valeurs provenant de la classe du player (passé en argument) 
+# La seconde est l'option combattre, dans laquelle on attribue au variable
+# de combat, des valeurs provenant de la classe du player (passé en argument)
 # ainsi que du monstre (également passé en argument)
 # La troisième, il se soigne.
+
+
 def fight(player, monster):
 
     print_line(f"Vous êtes face à un nouvel ennemi, {monster.name} !\n")
@@ -554,7 +585,7 @@ def fight(player, monster):
             defense = player.choose_defense()
             # Si le dictionnaire player.defense n'est pas vide (The Real Chuck Norris)
             # attribuer les point de defense d'une armure choisie.
-            if defense != None: 
+            if defense != None:
                 armor_defense = int(player.objects['Armor'][defense])
 
             # Ici fonction comportant la formule de dommage au monstre.
@@ -580,7 +611,7 @@ def fight(player, monster):
                     # Affiche la vie du monstre si celui-ci est encore en vie.
                     if monster.life > 0:
                         print_line("La vie du monstre est de " +
-                                str(monster.life) + "\n")
+                                   str(monster.life) + "\n")
 
                 if monster.life > 0:
                     # De même, l'attaque du monstre est la valeur de la clé obtenue a partir de choose_attack dans monster.attack[].
@@ -592,7 +623,7 @@ def fight(player, monster):
                     # Affiche la vie du player si celui-ci est encore en vie.
                     if player.life > 0:
                         print_line("Votre vie est de " +
-                                str(player.life) + "\n")
+                                   str(player.life) + "\n")
             # Si la vie du joueur ou du monstre devient négative, imprimer le vainqueur
             if player.life <= 0:
                 print_line("Le monstre a vaincu!\n")
@@ -654,6 +685,8 @@ def fight(player, monster):
     return
 
 # Fonction qui retourne le scénario de la princesse, qui n'est autre que la femme de Chuck Norris.
+
+
 def princess(player):
     print_line("Vous êtes face à quelque chose d'innattendu...\n")
     print_line(
@@ -684,6 +717,8 @@ def princess(player):
     return
 
     # Texte de win subtil.
+
+
 def win(player):
     print_line("La partie est finie.\n")
     print_line("Scaraouche, scaramouche, une fois de plus, vous avez prouvé votre talent d'aventurier grâce à vos nerf d'acier et à un mental en metal, ou peut-être l'inverse!\n")
@@ -692,10 +727,12 @@ def win(player):
     player.inventory()
     print_line(
         "La map et les items découverts seront sauvegardés pour la partie suivante\n")
-    # save_map()
+    reset_map()
     return
 
     # Texte de loose encore plus subtil.
+
+
 def game_over(player):
     curtains()
     print_line("Game Over.")
@@ -703,16 +740,20 @@ def game_over(player):
     print_line(
         f"Mais vous ne vous en tirez pas trop mal {name}, vous repartez avec {player.experience}XP.\n")
     credits()
-    # print_line(
-    #     "La map et les items découverts seront sauvegardés pour la partie suivante\n")
-    # save_map()
+    print_line(
+        "La map et les items découverts seront sauvegardés pour la partie suivante\n")
+    reset_map()
     return
 
 ###########################################################
 ###########################################################
 
-# def save_map():
-#     return
+
+def reset_map():
+    maps.level1.map = maps.level1.new_map
+    maps.level2.map = maps.level2.new_map
+    maps.level3.map = maps.level3.new_map
+    return
 
 
 def credits():
@@ -723,6 +764,7 @@ def credits():
 def exit():
     # quitter le jeu
     return
+
 
 game(classes.Chuck_Norris)
 # Menu()
