@@ -106,7 +106,9 @@ def loading_bar(txt):
 
 name = ''
 
-# Entrer une explication de la fonction.
+# Demande le nom de l'utilisateur
+# Ainsi que sa confirmation
+# Redirige au début de la fonction en cas de saisie invalide
 
 
 def ask_name():
@@ -315,6 +317,8 @@ def tutorial(player):
 # des dernières case du niveau actuel, et d'upgrader la map au niveau superieur
 # ainsi que de resetter la position i (lignes) du joueur pour qu'il apparaisse
 # au début de la map et non à la fin.
+
+
 def game(player):
 
     map = maps.level1
@@ -390,6 +394,8 @@ def game(player):
 # Permet au joueur de se mouvoir sur la map avec les commandes du
 # code vu plus haut. Elle permet aussi de voir les commandes et
 # d'afficher l'inventaire.
+
+
 def move1(game, player):
 
     def move2(game, player):
@@ -416,6 +422,8 @@ def move1(game, player):
     return
 
 # Permet de retransrire les mouvements du joueur sur la carte.
+
+
 def map1(game, player, move):
     # On essaie de créer une variable qui puisse afficher la position du joueur sur la map
     # et qui imprime la position d'un objet/ennemi découvert.
@@ -474,6 +482,8 @@ def map1(game, player, move):
 
 # Cette fonction permet d'invoquer telle ou telle fonction en
 # fonction de ce qui est inscrit dans cette case de la map du niveau.
+
+
 def position1(player, position):
 
     if position == "  ":
@@ -539,6 +549,8 @@ def position1(player, position):
 # de combat, des valeurs provenant de la classe du player (passé en argument)
 # ainsi que du monstre (également passé en argument)
 # La troisième, il se soigne.
+
+
 def fight(player, monster):
 
     print_line(f"Vous êtes face à un nouvel ennemi, {monster.name} !\n")
@@ -670,6 +682,8 @@ def fight(player, monster):
     return
 
 # Fonction qui retourne le scénario de la princesse, qui n'est autre que la femme de Chuck Norris.
+
+
 def princess(player):
     print_line("Vous êtes face à quelque chose d'innattendu...\n")
     print_line(
@@ -735,6 +749,7 @@ def game_over(player):
 ###########################################################
 ###########################################################
 
+
 def reset_items(player):
     if player.name == "Chuck Norris":
         player.objects = {"Weapon": ["Couteau"], "Armor": {
@@ -758,6 +773,13 @@ def reset_map():
 
 
 def credits():
+    nom = ["Mozamel Himidi", "Abraham Lawson", "Rachid Lazazi",
+           "Luka Stankovic", "Saad Loulidi", "Anis", "Yohann Di Crescenzo"]
+    print(*nom, sep="\n")
+    sleep(0.25)
     return
+
+
+credits()
 
 Menu()

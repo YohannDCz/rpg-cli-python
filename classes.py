@@ -111,7 +111,7 @@ class player:
             # Si le joueur n'a pas de potionsm l'afficher.
             elif len(self.objects["Potion"]) == 0:
                 print_line("Vous n'avez pas de potions !\n")
-
+        return
 
     def find_object(self, object1, object2):
         # Texte à choix multiple.
