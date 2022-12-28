@@ -103,12 +103,15 @@ class player:
                 # Mème schémas que les items d'arme et d'armures.
                 for key, value in self.objects["Potion"].items():
                     # on itère à travers ce dernier.
-                    print(f"- {key}: ({value} points de vie).")
+                    if value[0] == 0:
+                        print(f"- {key}: régénère tous les points de vie.")
+                    else:
+                        print(f"- {key}: régénère et rajoute {value[0]} points de vie.")
                 sleep(0.2)
             # Si le joueur n'a pas de potionsm l'afficher.
             elif len(self.objects["Potion"]) == 0:
                 print_line("Vous n'avez pas de potions !\n")
-            return
+
 
     def find_object(self, object1, object2):
         # Texte à choix multiple.
@@ -206,8 +209,8 @@ class player:
 # Ici les trois mode de dificulté, toutes trois instances de player.
 The_Fat_Chuck_Norris = player("The Fat Chuck Norris", 100, 0, 0, 100, 100, {"Weapon": ["Mauvaise haleine"], "Armor": {
                               "Bedaine alccolisée": 0}, "Potion": {"Cerceuil": 0}}, {"Rot retentissant": 0}, 1, 6, 4, "  ")
-Chuck_Norris = player("Chuck Norris", 100, 50, 30, 400, 400, {"Weapon": ["Couteau"], "Armor": {
-                      "Chuck t-shirt": 15, "Chuck bear": 25}, "Potion": {"Alcool de comptoir": [100, 100]}}, {"Simple slap": 10, "Chuck stab": 25}, 1, 6, 4, "  ")
+Chuck_Norris = player("Chuck Norris", 1000, 50, 30, 400, 400, {"Weapon": ["Couteau"], "Armor": {
+                      "Chuck t-shirt": 15, "Chuck bear": 25}, "Potion": {"Alcool de comptoir": [0, 50]}}, {"Simple slap": 10, "Chuck stab": 25}, 1, 1, 4, "  ")
 The_Real_Chuck_Norris = player("The Real Chuck Norris", 1000, 1000, 1000, 1000, 1000, {
     "Weapon": [], "Armor": {}, "Potion": {}}, {"Simple slap": 1000}, 100, 6, 4, "  ")
 

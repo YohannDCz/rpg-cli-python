@@ -315,8 +315,6 @@ def tutorial(player):
 # des dernières case du niveau actuel, et d'upgrader la map au niveau superieur
 # ainsi que de resetter la position i (lignes) du joueur pour qu'il apparaisse
 # au début de la map et non à la fin.
-
-
 def game(player):
 
     map = maps.level1
@@ -327,19 +325,18 @@ def game(player):
     map.displayed[player.i][player.j] = "J "
     maps.display_map(map.displayed)
 
-    def game1(player, map, x):
+    def game1(player, map):
         # Tant que le joueur n'a pas franchit le deuxième niveau (player.i == 0)
         # et qu'il est en vie, répéter la proposition de bouger (move1()).
         while player.i > 0 and player.life > 0:
             move1(map, player)
-        if map.level == x and player.i == 0:
-            # Augmente le x pour stocker le niveau d'après.
-            if x == 2:
+        if player.i == 0:
+            if map.level == 2:
                 map = maps.level3
-                x += 1
-            elif x == 1:
+            elif map.level == 1:
                 map = maps.level2
-                x += 1
+            elif map.level == 3:
+                return
             print_line(f"Vous avez {player.experience}XP. ")
             print_line(
                 f"Le nombre d'XP requis pour passer le niveau est de {map.experience}XP.\n")
@@ -353,15 +350,12 @@ def game(player):
                 print_line("Voici la map du niveau.\n")
                 maps.display_map(map.displayed)
             else:
-                # Modifie le x actuel et set la map au niveau inferieur.
-                if x == 2:
-                    x -= 1
+                if map.level == 2:
                     map = maps.level1
-                elif x == 3:
-                    x -= 1
+                elif map.level == 3:
                     map = maps.level2
-                # Fonction de restart
 
+                # Fonction de restart
                 def restart():
                     print_line("Voulez vous redémarrer le niveau ? (oui/non)")
                     choice = str(input())
@@ -372,8 +366,8 @@ def game(player):
                         map.map[player.i][player.j] = "J "
                         map.displayed[player.i][player.j] = "J "
                         print_line("Vous venez de redémarrer le niveau.\n")
-                        game1(player, map, x)
                         reset_map()
+                        game1(player, map, x)
                         return
                     elif choice == "non":
                         game_over()
@@ -382,10 +376,9 @@ def game(player):
                         print_line("Je n'ai pas compris !\n")
                         restart()
                 restart()
-        x += 1
-    game1(player, maps.level1, x)
-    game1(player, maps.level2, x)
-    game1(player, maps.level3, x)
+    game1(player, maps.level1)
+    game1(player, maps.level2)
+    game1(player, maps.level3)
 
 ###########################################################
 ###########################################################
@@ -397,8 +390,6 @@ def game(player):
 # Permet au joueur de se mouvoir sur la map avec les commandes du
 # code vu plus haut. Elle permet aussi de voir les commandes et
 # d'afficher l'inventaire.
-
-
 def move1(game, player):
 
     def move2(game, player):
@@ -425,8 +416,6 @@ def move1(game, player):
     return
 
 # Permet de retransrire les mouvements du joueur sur la carte.
-
-
 def map1(game, player, move):
     # On essaie de créer une variable qui puisse afficher la position du joueur sur la map
     # et qui imprime la position d'un objet/ennemi découvert.
@@ -485,8 +474,6 @@ def map1(game, player, move):
 
 # Cette fonction permet d'invoquer telle ou telle fonction en
 # fonction de ce qui est inscrit dans cette case de la map du niveau.
-
-
 def position1(player, position):
 
     if position == "  ":
@@ -552,8 +539,6 @@ def position1(player, position):
 # de combat, des valeurs provenant de la classe du player (passé en argument)
 # ainsi que du monstre (également passé en argument)
 # La troisième, il se soigne.
-
-
 def fight(player, monster):
 
     print_line(f"Vous êtes face à un nouvel ennemi, {monster.name} !\n")
@@ -685,8 +670,6 @@ def fight(player, monster):
     return
 
 # Fonction qui retourne le scénario de la princesse, qui n'est autre que la femme de Chuck Norris.
-
-
 def princess(player):
     print_line("Vous êtes face à quelque chose d'innattendu...\n")
     print_line(
@@ -728,6 +711,7 @@ def win(player):
     print_line(
         "La map et les items découverts seront sauvegardés pour la partie suivante\n")
     reset_map()
+    credits()
     return
 
     # Texte de loose encore plus subtil.
@@ -741,12 +725,29 @@ def game_over(player):
         f"Mais vous ne vous en tirez pas trop mal {name}, vous repartez avec {player.experience}XP.\n")
     credits()
     print_line(
-        "La map et les items découverts seront sauvegardés pour la partie suivante\n")
+        "La map sera sauvegardés pour la partie suivante\n")
+    reset_items(player)
     reset_map()
+    credits()
+    Menu()
     return
 
 ###########################################################
 ###########################################################
+
+def reset_items(player):
+    if player.name == "Chuck Norris":
+        player.objects = {"Weapon": ["Couteau"], "Armor": {
+            "Chuck t-shirt": 15, "Chuck bear": 25}, "Potion": {"Alcool de comptoir": [100, 100]}}
+        player.attacks = {"Simple slap": 10, "Chuck stab": 25}
+    elif player.name == "The Fat Chuck Norris":
+        player.objets = {"Weapon": ["Mauvaise haleine"], "Armor": {
+            "Bedaine alccolisée": 0}, "Potion": {"Cerceuil": 0}}
+        player.attacks = {"Rot retentissant": 0}
+    elif player.name == "The Real Chuck Norris":
+        player.objects = {
+            "Weapon": [], "Armor": {}, "Potion": {}}
+        player.attacks = {"Simple slap": 1000}
 
 
 def reset_map():
@@ -757,17 +758,6 @@ def reset_map():
 
 
 def credits():
-    # print afficher del infol sur la teaml
     return
 
-
-def exit():
-    # quitter le jeu
-    return
-
-
-game(classes.Chuck_Norris)
-# Menu()
-
-# Inclure la map
-# Faire les crédits et la redirection vers le début du jeu
+Menu()
