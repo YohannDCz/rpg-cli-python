@@ -575,7 +575,7 @@ def fight(player, monster):
         elif choice == 2:
             print_line("Vous avez soif de combat, alors passons à table !\n\n")
             curtains()
-            # Attribution des variables en fonction de la classe de player.
+            # Initialisation des variables en fonction de la classe de player.
             player_strength = int(player.strength)
             player_defense = int(player.defense)
             monster_defense = int(monster.defense)
@@ -779,7 +779,5 @@ def credits():
     sleep(0.25)
     return
 
-
-credits()
 
 Menu()
