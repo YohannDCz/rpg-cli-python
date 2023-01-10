@@ -723,8 +723,13 @@ def win(player):
         f"Vous vous en sortez avec {player.experience}XP, {player.life} points de vie et l'inventaire suivant:\n")
     player.inventory()
     print_line(
-        "La map et les items découverts seront sauvegardés pour la partie suivante\n")
-    reset_map()
+        "Voulez-vous sauvegarder la map? (oui/non)\n")
+    choice = str(input())
+    if choice == "oui":
+        return
+    elif choice == "non":
+        reset_map()
+    reset_items()
     credits()
     return
 
@@ -739,9 +744,13 @@ def game_over(player):
         f"Mais vous ne vous en tirez pas trop mal {name}, vous repartez avec {player.experience}XP.\n")
     credits()
     print_line(
-        "La map sera sauvegardés pour la partie suivante\n")
+        "Voulez-vous sauvegarder la map? (oui/non)\n")
+    choice = str(input())
+    if choice == "oui":
+        return
+    elif choice == "non":
+        reset_map()
     reset_items(player)
-    reset_map()
     credits()
     Menu()
     return
