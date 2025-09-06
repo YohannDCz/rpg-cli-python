@@ -1,7 +1,7 @@
 # Projet_RPG_python
 
 Projet à travailler et répartir entre les 5 membres de l'équipe.
-(edit 2025: on les aimes, nos stagiaires 😉)
+
 
 - Fonctionnalité Combat: 5 points
 - Fonctionnalité Mouvement: 5 points
@@ -11,3 +11,5 @@ Projet à travailler et répartir entre les 5 membres de l'équipe.
 #####################################################
 
 - Formule de combat: Dommages = Attaque * Coefficient(objet) / (Défense + 100 / 100)
+
+(edit 2025: on les aimes, nos stagiaires 😉)
